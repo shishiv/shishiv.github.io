@@ -7,6 +7,13 @@
 
 # config local da máquina
 .impeccable/config.local.json
+.impeccable/hook.cache.json
+
+# verdade de produto fica local: contém a lista de claims não comprováveis,
+# nota interna de cliente, número de processo e caminho de máquina. o
+# repositório é público, e isso não é material de vitrine.
+# DESIGN.md continua versionado: é sistema de design, e ser lido só ajuda.
+PRODUCT.md
 
 # build
 dist/

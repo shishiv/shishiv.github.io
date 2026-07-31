@@ -45,11 +45,20 @@ visível.
 
 ## publicar
 
-`.github/workflows/deploy.yml` publica no GitHub Pages a cada push na `main`.
+Site de usuário: o repositório precisa se chamar **`shishiv.github.io`**.
 
-Antes do primeiro deploy, em **Settings → Pages**, escolha **GitHub Actions**
-como origem.
+```sh
+gh repo create shishiv/shishiv.github.io --public --source=. --remote=origin --push
+```
 
-Se o repositório não se chamar `portfolio`, ajuste `base` em
-`astro.config.mjs`. Se um dia virar `shishiv.github.io` na raiz, `base` vira
-`"/"`.
+Depois, em **Settings → Pages → Build and deployment → Source**, escolha
+**GitHub Actions**.
+
+> O quickstart oficial do GitHub Pages manda escolher *Deploy from a branch* e
+> criar um `_config.yml`. Aquilo é o caminho do Jekyll. Este site é Astro e
+> precisa de build, então a origem tem que ser GitHub Actions e não existe
+> `_config.yml` aqui. Escolher *Deploy from a branch* publicaria o código-fonte
+> em vez do site.
+
+`.github/workflows/deploy.yml` publica a cada push na `main`. O primeiro
+deploy sai sozinho depois que a origem estiver em GitHub Actions.
