@@ -33,7 +33,7 @@
       "pt": "2024",
       "en": "2024"
     },
-    "href": "https://www.sctifrutal.com.br/edi%C3%A7%C3%B5es/scti-2024"
+    "href": "https://www.sctifrutal.com.br/edi%C3%A7%C3%B5es/SCTI-2024"
   },
   {
     "id": "avance-jr",
@@ -61,8 +61,8 @@
       "en": "avancebot"
     },
     "tech": {
-      "pt": "primeira automação de whatsapp em produção",
-      "en": "first whatsapp automation running in production"
+      "pt": "primeira automação de WhatsApp em produção",
+      "en": "first WhatsApp automation running in production"
     },
     "meta": {
       "pt": "mar/2025",
@@ -78,8 +78,8 @@
       "en": "bibliokopke"
     },
     "tech": {
-      "pt": "c# · .net · controle de biblioteca · precede o educa",
-      "en": "c# · .net · library management · predates educa"
+      "pt": "C# · .NET · controle de biblioteca · precede o educa",
+      "en": "C# · .NET · library management · predates educa"
     },
     "meta": {
       "pt": "jul/2025",
@@ -92,8 +92,8 @@
     "date": "2025-09",
     "proof": "full",
     "title": {
-      "pt": "educa · open source mit",
-      "en": "educa · mit open source"
+      "pt": "educa · open source MIT",
+      "en": "educa · MIT open source"
     },
     "tech": {
       "pt": "next 16 · react 19 · ts strict · supabase · row level security",
@@ -114,8 +114,8 @@
       "en": "municipal department of education"
     },
     "tech": {
-      "pt": "python · ocr · prestação de contas · calculadora tributária, 9 unidades",
-      "en": "python · ocr · accounting automation · tax calculator, 9 school units"
+      "pt": "python · OCR · prestação de contas · calculadora tributária, 9 unidades",
+      "en": "python · OCR · accounting automation · tax calculator, 9 school units"
     },
     "meta": {
       "pt": "set/2025 → fev/2026",
@@ -149,8 +149,8 @@
       "en": "gastei"
     },
     "tech": {
-      "pt": "financeiro dentro de um grupo de whatsapp",
-      "en": "shared finances inside a whatsapp group"
+      "pt": "nestjs · bullmq · postgres · go · whatsmeow · pgvector",
+      "en": "nestjs · bullmq · postgres · go · whatsmeow · pgvector"
     },
     "meta": {
       "pt": "fev/2026 → hoje",

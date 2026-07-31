@@ -4,12 +4,12 @@
     "name": "gastei",
     "stack": [
       "nestjs · bullmq · postgres · drizzle · redis",
-      "go · whatsmeow · pgvector · ocr"
+      "go · whatsmeow · pgvector · OCR"
     ],
     "decision": [
       {
-        "pt": "multi-tenancy por grupo de whatsapp, com rls testado adversarialmente",
-        "en": "per-whatsapp-group multi-tenancy, with adversarially tested rls"
+        "pt": "multi-tenancy por grupo de WhatsApp, com RLS testado adversarialmente",
+        "en": "per-WhatsApp-group multi-tenancy, with adversarially tested RLS"
       }
     ],
     "links": [
@@ -24,7 +24,7 @@
     "name": "educa",
     "stack": [
       "next 16 · react 19 · ts strict · supabase",
-      "postgres · vitest · mit"
+      "postgres · vitest · MIT"
     ],
     "decision": [
       {
@@ -69,11 +69,11 @@
   {
     "id": "inclusao-digital",
     "name": {
-      "pt": "inclusão digital uemg",
-      "en": "digital inclusion uemg"
+      "pt": "inclusão digital UEMG",
+      "en": "digital inclusion UEMG"
     },
     "stack": [
-      "html · css · vite · 2,7 kb"
+      "HTML · CSS · vite · 2,7 kb"
     ],
     "decision": [
       {
@@ -91,7 +91,7 @@
           "pt": "repositório",
           "en": "repository"
         },
-        "href": "https://github.com/shishiv/inclusao-digital-uemg"
+        "href": "https://github.com/shishiv/inclusao-digital-UEMG"
       }
     ]
   },
@@ -118,7 +118,7 @@
     "id": "bibliokopke",
     "name": "bibliokopke",
     "stack": [
-      "c# · .net"
+      "C# · .NET"
     ],
     "decision": [
       {
@@ -144,8 +144,8 @@
     ],
     "decision": [
       {
-        "pt": "arquivado, em retomada",
-        "en": "archived, being picked back up"
+        "pt": "arquivado; retomada planejada",
+        "en": "archived; restart planned"
       }
     ],
     "links": [
@@ -166,8 +166,8 @@
     ],
     "decision": [
       {
-        "pt": "staging efêmero com ttl, imagem imutável, rollback",
-        "en": "ephemeral staging with ttl, immutable images, rollback"
+        "pt": "staging efêmero com TTL, imagem imutável, rollback",
+        "en": "ephemeral staging with TTL, immutable images, rollback"
       }
     ],
     "links": []
@@ -180,8 +180,8 @@
     ],
     "decision": [
       {
-        "pt": "remove pii antes de qualquer coisa sair da máquina",
-        "en": "strips pii before anything leaves the machine"
+        "pt": "console local de logs, sem transmitir dado pessoal",
+        "en": "local log console, no personal data leaves the machine"
       }
     ],
     "links": []

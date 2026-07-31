@@ -9,16 +9,18 @@
  */
 import rawEvents from "../data/events.json";
 import { placeEvents, t, type PortfolioEvent } from "../lib/spine";
-import type { Locale } from "../i18n/ui";
+import { useUi, type Locale } from "../i18n/ui";
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+const copy = useUi(locale);
 const ordered = placeEvents(rawEvents as PortfolioEvent[]);
 ---
 
+<h2 class="spine-heading">{copy.spineTitle}</h2>
 <ol class="spine-list">
   {
     ordered.map((event) => (

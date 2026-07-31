@@ -83,7 +83,7 @@ Violeta e não vermelho por medição, não por gosto: o papel é um cinza-buff 
 
 Grade de documento, não de cards. Espinha de tempo à esquerda ocupando a maior parte da largura, registro de sistemas à direita separado por filete de 1px em tinta.
 
-O tempo desce na vertical, com **compressão não-linear**: o período corrente ocupa cerca de metade do comprimento e os anteriores comprimem. A fita segue legível de 9 a 300 eventos.
+O tempo desce na vertical, com **compressão não-linear**: o período corrente ocupa cerca de metade do comprimento e os anteriores comprimem. A faixa atual comporta **12 eventos**, medido: 738px de altura com vão mínimo de 62px. Acima disso o build falha dizendo quantos pixels faltam e quais números ajustar; a capacidade não se estica em silêncio.
 
 Um nó pode estar **aberto**, e então expande um cluster de notas ligadas por arestas finas. Arestas em tinta são relação; arestas em seda terminam em algo conferível agora. A rede completa vive numa rota própria.
 

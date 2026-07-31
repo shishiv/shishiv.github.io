@@ -45,18 +45,11 @@ body {
   font-family: var(--font-name);
   font-size: 0.9375rem;
   line-height: 1.45;
-  text-transform: lowercase;
   display: grid;
   place-items: start center;
   padding: calc(var(--step) * 3);
 }
 
-/* nomes de terceiros, siglas e endereços mantêm a grafia real */
-[data-case="as-written"],
-abbr,
-code {
-  text-transform: none;
-}
 
 a {
   color: inherit;
@@ -80,7 +73,6 @@ a {
 }
 
 /* resposta no pointer-down, não na soltura. o link precisa reagir ao toque. */
-.mailto:active,
 .sys-links a:active {
   color: var(--indigo);
   border-bottom-color: var(--indigo);
@@ -148,7 +140,6 @@ a {
   color: rgba(241, 239, 244, 0.84);
   line-height: 1.8;
   text-align: right;
-  text-transform: none;
 }
 
 .stackcard b {
@@ -319,7 +310,6 @@ a {
   font-size: 0.55rem;
   letter-spacing: 0.16em;
   color: var(--ink-34);
-  text-transform: none;
 }
 
 .registry table {
@@ -354,7 +344,6 @@ a {
   font-size: 0.625rem;
   color: var(--ink-58);
   letter-spacing: 0.04em;
-  text-transform: none;
 }
 
 .sys-decision {
@@ -375,7 +364,9 @@ a {
   display: block;
   font-family: var(--font-measure);
   font-size: 0.625rem;
-  text-transform: none;
+  /* wcag 2.5.8: alvo de 24px. empilhados eles mediam 15,5px. */
+  min-height: 24px;
+  line-height: 24px;
 }
 
 .sys-links a {
@@ -407,29 +398,27 @@ a {
   flex-wrap: wrap;
 }
 
-.mailto {
-  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  border-bottom: 2px solid var(--indigo);
-  padding-bottom: 2px;
-  text-transform: none;
-}
-
 .colophon nav {
   font-family: var(--font-measure);
   font-size: 0.625rem;
   color: var(--ink-34);
   text-align: right;
   line-height: 1.85;
-  text-transform: none;
 }
 
 .colophon nav a {
   color: var(--ink-58);
   text-decoration: none;
   border-bottom: 1px solid var(--indigo);
+}
+
+/* wcag 2.5.8: os seletores de idioma mediam 14px de altura */
+.langswitch a {
+  display: inline-block;
+  min-width: 24px;
+  min-height: 24px;
+  line-height: 24px;
+  text-align: center;
 }
 
 .colophon nav a:hover {
@@ -483,7 +472,15 @@ a {
   }
 
   .sys-links {
-    width: 38%;
+    width: 42%;
+  }
+
+  .sys-links a,
+  .sys-links span {
+    /* em 390px o endereço media 138px numa célula de 130px */
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+    padding: 3px 0;
   }
 }
 
@@ -522,14 +519,11 @@ a {
    invisível no largo mas presente para leitor de tela, e visível no estreito,
    onde encolher o svg apagaria o texto. */
 
-.spine-list {
-  list-style: none;
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+/* no largo o svg é o conteúdo e a lista não existe. duas árvores focáveis,
+   uma delas invisível, é pior que uma só bem feita. */
+.spine-list,
+.spine-heading {
+  display: none;
 }
 
 .spine-item h3 {
@@ -540,6 +534,10 @@ a {
 .spine-item a {
   text-decoration: none;
   border-bottom: 1px solid var(--ink-16);
+  /* wcag 2.5.8 */
+  display: inline-block;
+  min-height: 24px;
+  line-height: 1.6;
 }
 
 .item-tech,
@@ -548,7 +546,6 @@ a {
   font-size: 0.625rem;
   letter-spacing: 0.04em;
   color: var(--ink-58);
-  text-transform: none;
 }
 
 .item-meta {
@@ -556,7 +553,6 @@ a {
   font-size: 0.55rem;
   letter-spacing: 0.1em;
   color: var(--ink-34);
-  text-transform: none;
 }
 
 .item-cluster {
@@ -583,6 +579,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 24px;
 }
 
 .icon {
@@ -592,6 +589,8 @@ a {
 
 .social a:hover .icon {
   opacity: 1;
+  /* o ícone não muda de cor: violeta é estrutura, nunca cor de ícone */
+  color: var(--ink);
 }
 
 .bio,
@@ -604,13 +603,17 @@ a {
     display: none;
   }
 
+  .spine-heading {
+    display: block;
+    font-family: var(--font-measure);
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+    font-weight: 400;
+    color: var(--ink-34);
+    margin-bottom: calc(var(--step) * 2);
+  }
+
   .spine-list {
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip-path: none;
-    white-space: normal;
     display: grid;
     gap: calc(var(--step) * 3);
     position: relative;
@@ -732,7 +735,6 @@ a {
   letter-spacing: 0.16em;
   font-weight: 400;
   color: var(--ink-34);
-  text-transform: none;
   margin-bottom: 6px;
 }
 
@@ -767,7 +769,6 @@ a {
   font-size: 0.55rem;
   letter-spacing: 0.1em;
   color: var(--ink-34);
-  text-transform: none;
   white-space: nowrap;
 }
 
