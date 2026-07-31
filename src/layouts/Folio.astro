@@ -1,0 +1,111 @@
+---
+/**
+ * CONTRATO DE DIREÇÃO — home
+ *
+ * THESIS: uma fita de custódia carrega a vida de trabalho em ordem de tempo,
+ *   e o que não pode ser provado desfia em vez de sumir. recusa o hero, a
+ *   grade de cards e o portfólio-terminal que a categoria sempre entrega.
+ * OWN-WORLD: papel de arquivo cinza-buff frio, tinta preta hairline, uma
+ *   seda vermelha contínua. mono mede, serifa decide, condensada nomeia.
+ *   cantos vivos, zero sombra interna, zero tracejado.
+ * STORY: o recrutador lê a trajetória num olhar, abre um nó e vê a rede de
+ *   evidência, varre o registro técnico à direita e manda e-mail.
+ * FIRST VIEWPORT: nome à esquerda e a stack como ficha técnica à direita;
+ *   abaixo, a espinha vertical com nós datados e um nó expandido em cluster;
+ *   à direita, o registro de sistemas; e-mail no rodapé, sublinhado em seda.
+ * FORM: linha de custódia de proveniência museológica, 4ª da lista ordenada,
+ *   escolhida pelo usuário sobre a direção sorteada (caderno de pranchas).
+ *   seed 68872683 · challenger exhibition-museum-curation-provenance-ribbon.
+ */
+import "../styles/world.css";
+import Spine from "../components/Spine.astro";
+import SpineList from "../components/SpineList.astro";
+import Icon from "../components/Icon.astro";
+import RecentPosts from "../components/RecentPosts.astro";
+import Registry from "../components/Registry.astro";
+import { useUi, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = useUi(locale);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const home = { pt: `${base}/`, en: `${base}/en/` };
+const canonical = new URL(home[locale], Astro.site ?? "https://shishiv.github.io");
+---
+
+<!doctype html>
+<html lang={locale === "pt" ? "pt-BR" : "en"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{copy.title}</title>
+    <meta name="description" content={copy.description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="pt-BR" href={new URL(home.pt, canonical).href} />
+    <link rel="alternate" hreflang="en" href={new URL(home.en, canonical).href} />
+    <meta property="og:title" content={copy.title} />
+    <meta property="og:description" content={copy.description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="theme-color" content="#e4e0d5" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Petrona:ital,wght@0,400;1,400&display=swap"
+    />
+  </head>
+  <body>
+    <main class="folio">
+      <header class="masthead">
+        <h1>myke matos</h1>
+        <p class="stackcard">
+          <b>python</b> · typescript · javascript · sql · c# · go<br />
+          <b>nestjs</b> · next 16 · react 19 · postgres · drizzle · redis · bullmq<br />
+          <b>docker swarm</b> · traefik · linux · gha · ghcr · vercel · azure
+        </p>
+      </header>
+
+      <div class="sheetbody">
+        <div class="spine">
+          <Spine locale={locale} />
+          <SpineList locale={locale} />
+        </div>
+        <Registry locale={locale} />
+      </div>
+
+      <footer class="colophon">
+        <RecentPosts locale={locale} />
+        <nav aria-label={copy.langLabel}>
+          <ul class="social">
+            <li>
+              <a href="mailto:myke@triangulotec.com.br">
+                <Icon name="mail" /> myke@triangulotec.com.br
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/shishiv" rel="me noopener">
+                <Icon name="github" /> github.com/shishiv
+              </a>
+            </li>
+            <li>
+              <a href="https://linkedin.com/in/mykematos" rel="me noopener">
+                <Icon name="linkedin" /> linkedin.com/in/mykematos
+              </a>
+            </li>
+          </ul>
+          <p class="bio">{copy.education} &nbsp;·&nbsp; {copy.training}</p>
+          <p class="langswitch">
+            <a href={home.pt} hreflang="pt-BR" aria-current={locale === "pt" ? "true" : undefined}>pt</a>
+            &nbsp;·&nbsp;
+            <a href={home.en} hreflang="en" aria-current={locale === "en" ? "true" : undefined}>en</a>
+          </p>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

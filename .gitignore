@@ -1,0 +1,18 @@
+# evidência de trabalho: contém material interno, de cliente e pessoal.
+# nunca versionar. o repositório é público (github pages).
+.impeccable/evidence/
+
+# protótipos descartáveis de direção visual
+.impeccable/prototypes/
+
+# config local da máquina
+.impeccable/config.local.json
+
+# build
+dist/
+.astro/
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store

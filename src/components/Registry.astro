@@ -1,0 +1,63 @@
+---
+import systems from "../data/systems.json";
+import { t, type Localized } from "../lib/spine";
+import { useUi, type Locale } from "../i18n/ui";
+
+interface SystemLink {
+  label: Localized;
+  href: string;
+}
+
+interface SystemRow {
+  id: string;
+  name: Localized;
+  stack: string[];
+  decision: Localized[];
+  links: SystemLink[];
+}
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = useUi(locale);
+const rows = systems as SystemRow[];
+const openable = rows.filter((row) => row.links.length > 0).length;
+---
+
+<section class="registry" id="registro" aria-labelledby="registry-title">
+  <div class="registry-head">
+    <h2 id="registry-title">{copy.registry}</h2>
+    <span class="tally">{copy.tally(openable, rows.length)}</span>
+  </div>
+
+  <table>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            <td>
+              <span class="sys-name" data-case="as-written">{t(row.name, locale)}</span>
+              {row.stack.map((line) => (
+                <span class="sys-stack">{line}</span>
+              ))}
+              {row.decision.map((line) => (
+                <span class="sys-decision">{t(line, locale)}</span>
+              ))}
+            </td>
+            <td class="sys-links">
+              {row.links.length > 0 ? (
+                row.links.map((link) => (
+                  <a href={link.href} rel="noopener">{t(link.label, locale)}</a>
+                ))
+              ) : (
+                <span>{copy.privateCode}</span>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</section>

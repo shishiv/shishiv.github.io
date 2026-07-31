@@ -1,0 +1,56 @@
+---
+/**
+ * a mesma linha de custódia, em lista.
+ *
+ * o svg é uma representação: no estreito ele encolheria o texto até sumir, e
+ * o recrutador chega pelo celular. então o svg fica `aria-hidden` e esta lista
+ * é o conteúdo de verdade — visível no estreito, e sempre disponível para
+ * leitor de tela.
+ */
+import rawEvents from "../data/events.json";
+import { placeEvents, t, type PortfolioEvent } from "../lib/spine";
+import type { Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ordered = placeEvents(rawEvents as PortfolioEvent[]);
+---
+
+<ol class="spine-list">
+  {
+    ordered.map((event) => (
+      <li class="spine-item" data-proof={event.proof} data-open={event.open ? "true" : undefined}>
+        <h3>
+          {event.href ? (
+            <a href={event.href} rel="noopener">{t(event.title, locale)}</a>
+          ) : (
+            t(event.title, locale)
+          )}
+        </h3>
+        <p class="item-tech">{t(event.tech, locale)}</p>
+        {event.meta && <p class="item-meta">{t(event.meta, locale)}</p>}
+        {
+          event.cluster && (
+            <ul class="item-cluster">
+              {event.cluster.map((node) => (
+                <li>
+                  <span class="node-title">
+                    {node.href ? (
+                      <a href={node.href} rel="noopener">{t(node.title, locale)}</a>
+                    ) : (
+                      t(node.title, locale)
+                    )}
+                  </span>
+                  <span class="node-tech">{t(node.tech, locale)}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </li>
+    ))
+  }
+</ol>
