@@ -4,7 +4,7 @@ export const LOCALES: Locale[] = ["pt", "en"];
 
 export const ui = {
   pt: {
-    title: "myke matos · engenheiro full-stack e de plataforma",
+    title: "myke matos · dev full-stack",
     description:
       "linha de custódia do trabalho de myke matos: sistemas em produção, código aberto e cliente real. o que é público traz link conferível; o que é privado diz que é privado.",
     registry: "registro de sistemas",
@@ -23,7 +23,7 @@ export const ui = {
     postsEmpty: "primeiro post a caminho. é aqui que vão entrar extensão, pesquisa e nota de arquitetura.",
   },
   en: {
-    title: "myke matos · full-stack and platform engineer",
+    title: "myke matos · full-stack dev",
     description:
       "chain of custody for myke matos's work: systems in production, open source and a real client. public work carries a checkable link; private work says it is private.",
     registry: "systems registry",
