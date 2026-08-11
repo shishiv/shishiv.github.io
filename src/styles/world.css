@@ -60,6 +60,11 @@ a {
   outline-offset: 4px;
 }
 
+/* the main landmark is only focusable as the skip-link destination. */
+.folio:focus {
+  outline: none;
+}
+
 .skip-link {
   position: fixed;
   z-index: 10;
@@ -72,7 +77,6 @@ a {
   font-size: 0.75rem;
   text-decoration: none;
   transform: translateY(-180%);
-  transition: transform 150ms var(--ease-out);
 }
 
 .skip-link:focus-visible {
@@ -231,7 +235,6 @@ a {
   align-items: center;
   color: var(--white);
   text-decoration-color: transparent;
-  transition: color 140ms ease, text-decoration-color 140ms ease;
 }
 
 .site-nav a:hover,
@@ -643,6 +646,14 @@ a {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  .skip-link {
+    transition: transform 150ms var(--ease-out);
+  }
+
+  .site-nav a {
+    transition: color 140ms ease, text-decoration-color 140ms ease;
   }
 
   .masthead {

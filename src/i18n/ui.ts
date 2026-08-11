@@ -12,7 +12,6 @@ export const ui = {
       "eu construo software e mantenho a operação legível: o manifesto limita a imagem, a configuração fica fora do código, o cache declara sua fronteira e a falha deixa evidência.",
     sourceIntro: "a fonte desta página é",
     sourceDescription: "infra-examples, recortes sanitizados derivados de infraestrutura real.",
-    sourceLink: "abrir repositório",
     primaryNav: "navegação principal",
     mapNav: "mapa",
     limitsNav: "limites",
@@ -59,7 +58,6 @@ export const ui = {
     emailLabel: "e-mail",
     githubLabel: "GitHub",
     linkedinLabel: "LinkedIn",
-    language: "idioma",
     footerNote: "conteúdo factual ancorado em infra-examples.",
   },
   en: {
@@ -73,7 +71,6 @@ export const ui = {
       "i build software and keep its operation legible: the manifest constrains the image, configuration stays out of code, cache declares its boundary, and failure leaves evidence.",
     sourceIntro: "this page is sourced from",
     sourceDescription: "infra-examples, sanitized excerpts derived from real infrastructure.",
-    sourceLink: "open repository",
     primaryNav: "primary navigation",
     mapNav: "map",
     limitsNav: "limits",
@@ -119,7 +116,6 @@ export const ui = {
     emailLabel: "email",
     githubLabel: "GitHub",
     linkedinLabel: "LinkedIn",
-    language: "language",
     footerNote: "factual content anchored in infra-examples.",
   },
 } as const;
