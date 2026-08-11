@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "lint": "node scripts/check-content.mjs",
+    "test": "node --test scripts/content-contract.test.mjs",
     "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {

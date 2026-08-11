@@ -1,0 +1,194 @@
+[
+  {
+    "id": "docker-swarm",
+    "name": "Docker Swarm",
+    "title": {
+      "pt": "staging sintético com ciclo de vida limitado",
+      "en": "synthetic staging with a bounded lifecycle"
+    },
+    "summary": {
+      "pt": "manifesto de imagens imutáveis, preflight sem mutação, pausa explícita, TTL e rollback.",
+      "en": "immutable image manifest, read-only preflight, an explicit paused state, TTL and rollback."
+    },
+    "decisions": {
+      "pt": [
+        "o manifesto vem antes da stack; cada imagem passa pela validação de imutabilidade.",
+        "a rede edge é observada, não administrada pelo exemplo.",
+        "falha e interrupção restauram o ciclo anterior, junto com o TTL."
+      ],
+      "en": [
+        "the manifest comes before the stack; every image passes immutable-reference validation.",
+        "the edge network is observed, not managed by the example.",
+        "failure and interruption restore the prior lifecycle together with its TTL."
+      ]
+    },
+    "boundary": {
+      "pt": "é um recorte sanitizado. não é um deploy pronto para um ambiente real.",
+      "en": "it is a sanitized excerpt. it is not a ready-to-run production deployment."
+    },
+    "source": {
+      "label": "docker-swarm/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/docker-swarm/README.md"
+    }
+  },
+  {
+    "id": "github-actions",
+    "name": "GitHub Actions",
+    "title": {
+      "pt": "ci separada da publicação",
+      "en": "ci separated from publishing"
+    },
+    "summary": {
+      "pt": "ShellCheck, parse de YAML e testes mock-only no portão; publicação estreita da página pausada.",
+      "en": "ShellCheck, YAML parsing and mock-only tests at the gate; narrow publishing for the paused page."
+    },
+    "decisions": {
+      "pt": [
+        "CI lê conteúdo; publicação recebe somente a permissão de escrever packages.",
+        "a tag sha-<commit> e o digest retornado pelo registry passam pela mesma validação.",
+        "nenhum caminho chama docker stack deploy."
+      ],
+      "en": [
+        "CI reads content; publishing gets only package-write permission.",
+        "the sha-<commit> tag and the registry digest pass through the same validation.",
+        "no path calls docker stack deploy."
+      ]
+    },
+    "boundary": {
+      "pt": "os workflows ficam fora da pasta ativa até uma revisão explícita de ativação.",
+      "en": "the workflows stay outside the active folder until an explicit activation review."
+    },
+    "source": {
+      "label": "github-actions/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/github-actions/README.md"
+    }
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js",
+    "title": {
+      "pt": "build, runtime e cache com fronteiras claras",
+      "en": "build, runtime and cache with clear boundaries"
+    },
+    "summary": {
+      "pt": "build multi-stage, saída standalone, runtime sem root e política de cache para dados privados.",
+      "en": "multi-stage build, standalone output, non-root runtime and a cache policy for private data."
+    },
+    "decisions": {
+      "pt": [
+        "dependências de desenvolvimento ficam no estágio de build; o runtime recebe só o necessário.",
+        "rotas autenticadas recebem private, no-store; assets versionados podem ser imutáveis.",
+        "configuração pública de build e valores server-only ficam separados."
+      ],
+      "en": [
+        "development dependencies stay in the build stage; runtime receives only what it needs.",
+        "authenticated routes get private, no-store; versioned assets can be immutable.",
+        "public build configuration and server-only values stay separate."
+      ]
+    },
+    "boundary": {
+      "pt": "é um recorte portável, não uma aplicação Next.js completa.",
+      "en": "it is a portable excerpt, not a complete Next.js application."
+    },
+    "source": {
+      "label": "nextjs/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/nextjs/README.md"
+    }
+  },
+  {
+    "id": "drizzle",
+    "name": "Drizzle",
+    "title": {
+      "pt": "migração e contrato de schema PostgreSQL",
+      "en": "PostgreSQL migration and schema contract"
+    },
+    "summary": {
+      "pt": "SQL ordenado por dependência, snapshot, journal, relações e tipos inferidos no código.",
+      "en": "dependency-ordered SQL, snapshot, journal, relations and inferred types in code."
+    },
+    "decisions": {
+      "pt": [
+        "o SQL é o caminho que o banco executa; o TypeScript mantém o contrato de tipos do app.",
+        "snapshot e journal ficam versionados para reconstruir o histórico de migrações.",
+        "tsvector aparece como tipo explícito, sem fingir uma abstração nativa do ORM."
+      ],
+      "en": [
+        "SQL is what the database executes; TypeScript keeps the app's type contract.",
+        "snapshot and journal stay versioned so migration history can be reconstructed.",
+        "tsvector appears as an explicit type instead of pretending the ORM has a native abstraction."
+      ]
+    },
+    "boundary": {
+      "pt": "o recorte mostra estrutura, não dados, credenciais ou endpoint de banco.",
+      "en": "the excerpt shows structure, not data, credentials or a live database endpoint."
+    },
+    "source": {
+      "label": "drizzle/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/drizzle/README.md"
+    }
+  },
+  {
+    "id": "playwright",
+    "name": "Playwright",
+    "title": {
+      "pt": "E2E por contrato, não por esperança",
+      "en": "contract E2E, not hope"
+    },
+    "summary": {
+      "pt": "rotas públicas, fronteira de autenticação e regressão visual determinística, com evidência de falha.",
+      "en": "public routes, authentication boundary and deterministic visual regression, with failure evidence."
+    },
+    "decisions": {
+      "pt": [
+        "a base local é explícita para um teste não acessar produção por acidente.",
+        "fixtures locais cobrem navegação sem exigir uma conta real.",
+        "transições, animações e caret são congelados antes do snapshot visual."
+      ],
+      "en": [
+        "the local base is explicit so a test cannot reach production by accident.",
+        "local fixtures cover navigation without requiring a real account.",
+        "transitions, animations and caret are frozen before the visual snapshot."
+      ]
+    },
+    "boundary": {
+      "pt": "o recorte assume um app Next.js com as rotas descritas nos próprios arquivos.",
+      "en": "the excerpt assumes a Next.js app with the routes described in its own files."
+    },
+    "source": {
+      "label": "playwright/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/playwright/README.md"
+    }
+  },
+  {
+    "id": "bash-ops",
+    "name": "Bash Ops",
+    "title": {
+      "pt": "operação com limite explícito",
+      "en": "operations with explicit limits"
+    },
+    "summary": {
+      "pt": "forced command em SSH, sandbox preso a loopback e bootstrap histórico de runner com opt-in.",
+      "en": "SSH forced command, loopback-only sandbox and an opt-in historical runner bootstrap."
+    },
+    "decisions": {
+      "pt": [
+        "a chave de deploy não recebe um shell arbitrário.",
+        "o sandbox serve o HTML real em diretório temporário e comprova 127.0.0.1.",
+        "o bootstrap de runner fica fora dos workflows ativos e exige revisão do host."
+      ],
+      "en": [
+        "the deploy key does not receive an arbitrary shell.",
+        "the sandbox serves real HTML from a temporary directory and proves 127.0.0.1.",
+        "the runner bootstrap stays outside active workflows and requires host review."
+      ]
+    },
+    "boundary": {
+      "pt": "nenhum script desta pasta acessa infraestrutura viva por padrão.",
+      "en": "no script in this folder accesses live infrastructure by default."
+    },
+    "source": {
+      "label": "bash-ops/README.md",
+      "href": "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/bash-ops/README.md"
+    }
+  }
+]
