@@ -100,7 +100,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
       className="callgraph"
       viewBox="0 0 1000 480"
       preserveAspectRatio="xMidYMid meet"
-      role="img"
+      role="group"
       aria-label="architecture graph"
     >
       <defs>
