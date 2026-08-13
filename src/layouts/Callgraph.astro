@@ -1,0 +1,368 @@
+---
+/**
+ * DIRECTION CONTRACT
+ * THESIS: the page is one interactive callgraph showing how 6 infrastructure
+ *   systems connect - architecture demonstrated, not described. Refuses the
+ *   card-grid and hero-statement arrangements.
+ * OWN-WORLD: light warm ground, dark ink, deep teal accent for interaction.
+ *   Bricolage Grotesque display, Literata body, JetBrains Mono for code paths.
+ *   No metaphorical skin - beauty from information design.
+ * STORY: the visitor sees the architecture immediately (how systems connect),
+ *   clicks a node to understand its decisions and boundaries, then opens a
+ *   conversation about a remote role.
+ * FIRST VIEWPORT: sticky header with name + statement, then the full
+ *   interactive callgraph of 6 systems with labeled dependency arrows.
+ *   Below: node detail panel on click.
+ * FORM: The Callgraph, #4 of resonance-ordered list, seed key a1b2c3d4.
+ * FINISH: unreviewed and undocumented is unfinished; this build ends with
+ *   the finish review, the verdict, and DESIGN.md.
+ */
+import "../styles/callgraph.css";
+import Icon from "../components/Icon.astro";
+import { useUi, type Locale } from "../i18n/ui";
+import infra from "../data/infra.json";
+import { edges, positions } from "../data/graph";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useUi(locale);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const home = { pt: `${base}/`, en: `${base}/en/` };
+const canonical = new URL(home[locale], Astro.site ?? "https://shishiv.github.io");
+
+// Pre-compute edge labels for template use
+const edgeLabelsMap = t.edgeLabels as Record<string, string>;
+
+// Build SVG path data for edges (quadratic bezier curves)
+function getNodeCenter(id: string) {
+  const pos = positions.find((p) => p.id === id);
+  if (!pos) return { x: 0, y: 0 };
+  return { x: pos.x * 10, y: pos.y * 6.2 };
+}
+
+function buildEdgePath(fromId: string, toId: string) {
+  const from = getNodeCenter(fromId);
+  const to = getNodeCenter(toId);
+  const midX = (from.x + to.x) / 2;
+  const midY = (from.y + to.y) / 2;
+  // slight curve offset perpendicular to the line
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  const offsetX = (-dy / len) * 15;
+  const offsetY = (dx / len) * 15;
+  const cx = midX + offsetX;
+  const cy = midY + offsetY;
+  return `M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`;
+}
+
+function getEdgeMidpoint(fromId: string, toId: string) {
+  const from = getNodeCenter(fromId);
+  const to = getNodeCenter(toId);
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const len = Math.sqrt(dx * dx + dy * dy);
+  const offsetX = (-dy / len) * 15;
+  const offsetY = (dx / len) * 15;
+  // quadratic bezier midpoint at t=0.5
+  const mx = 0.25 * from.x + 0.5 * ((from.x + to.x) / 2 + offsetX) + 0.25 * to.x;
+  const my = 0.25 * from.y + 0.5 * ((from.y + to.y) / 2 + offsetY) + 0.25 * to.y;
+  return { x: mx, y: my };
+}
+---
+
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.title}</title>
+    <meta name="description" content={t.description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="pt-BR" href={new URL(home.pt, canonical).href} />
+    <link rel="alternate" hreflang="en" href={new URL(home.en, canonical).href} />
+    <meta property="og:title" content={t.title} />
+    <meta property="og:description" content={t.description} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="theme-color" content="#1a5c5c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&family=JetBrains+Mono:wght@400;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap"
+    />
+  </head>
+  <body>
+    <!--
+      DIRECTION CONTRACT
+      THESIS: interactive callgraph as first viewport; architecture demonstrated.
+      OWN-WORLD: warm light ground, deep teal accent, Bricolage/Literata/JetBrains.
+      STORY: see connections → explore decisions → open conversation.
+      FIRST VIEWPORT: header + full interactive callgraph with labeled edges.
+      FORM: The Callgraph, seed a1b2c3d4.
+      FINISH: unreviewed and undocumented is unfinished.
+    -->
+    <a class="skip-link" href="#graph">{t.skipToContent}</a>
+
+    <header class="site-header">
+      <div class="header-identity">
+        <h1 class="header-name">{t.heroName}</h1>
+        <p class="header-statement">{t.heroStatement}</p>
+      </div>
+      <nav class="site-nav" aria-label={t.primaryNav}>
+        <a href="#graph">{t.graphNav}</a>
+        <a href="#limits">{t.limitsNav}</a>
+        <a href="#contact">{t.contactNav}</a>
+        <span class="nav-sep" aria-hidden="true"></span>
+        <a href={home.pt} hreflang="pt-BR" aria-current={locale === "pt" ? "page" : undefined}>pt</a>
+        <a href={home.en} hreflang="en" aria-current={locale === "en" ? "page" : undefined}>en</a>
+      </nav>
+    </header>
+
+    <main id="graph" tabindex="-1">
+      <section class="graph-section" aria-label={t.graphTitle}>
+        <p class="graph-intro">{t.heroContext}</p>
+
+        <div class="graph-container">
+          <svg
+            class="callgraph"
+            viewBox="0 0 1000 480"
+            preserveAspectRatio="xMidYMid meet"
+            role="img"
+            aria-label={t.graphTitle}
+          >
+            <defs>
+              <marker
+                id="arrowhead"
+                markerWidth="8"
+                markerHeight="6"
+                refX="7"
+                refY="3"
+                orient="auto"
+              >
+                <polygon points="0 0, 8 3, 0 6" class="graph-arrowhead" />
+              </marker>
+            </defs>
+
+            {/* Edges */}
+            {edges.map((edge) => {
+              const mid = getEdgeMidpoint(edge.from, edge.to);
+              const label = edgeLabelsMap[edge.id] || "";
+              return (
+                <>
+                  <path
+                    class="graph-edge"
+                    d={buildEdgePath(edge.from, edge.to)}
+                    marker-end="url(#arrowhead)"
+                    data-edge={edge.id}
+                  />
+                  {label && (
+                    <text
+                      class="edge-label"
+                      x={mid.x}
+                      y={mid.y - 6}
+                      text-anchor="middle"
+                      data-edge-label={edge.id}
+                    >
+                      {label}
+                    </text>
+                  )}
+                </>
+              );
+            })}
+
+            {/* Nodes */}
+            {positions.map((pos) => {
+              const item = infra.find((i) => i.id === pos.id || i.id === pos.id.replace("nextjs", "nextjs"));
+              const name = item?.name || pos.id;
+              const title = item?.title[locale] || "";
+              const cx = pos.x * 10;
+              const cy = pos.y * 7;
+              const w = 160;
+              const h = 56;
+              return (
+                <g
+                  class="graph-node"
+                  data-node={pos.id}
+                  tabindex="0"
+                  role="button"
+                  aria-expanded="false"
+                  aria-label={`${name}: ${title}`}
+                >
+                  <rect x={cx - w / 2} y={cy - h / 2} width={w} height={h} />
+                  <text class="node-name" x={cx} y={cy - 4} text-anchor="middle">
+                    {name}
+                  </text>
+                  <text class="node-title" x={cx} y={cy + 14} text-anchor="middle">
+                    {title.length > 28 ? title.slice(0, 26) + "..." : title}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Detail panel - populated by JS on node click */}
+        {infra.map((item) => (
+          <article
+            class="node-detail"
+            data-detail={item.id}
+            aria-live="polite"
+          >
+            <div class="detail-header">
+              <h2 class="detail-name">{item.name}</h2>
+              <button class="detail-close" data-close aria-label={t.closeDetail}>
+                {t.closeDetail} ×
+              </button>
+            </div>
+            <p class="detail-summary">{item.summary[locale]}</p>
+            <div class="detail-decisions">
+              <h4>{t.decisionsLabel}</h4>
+              <ul>
+                {item.decisions[locale].map((d) => (
+                  <li>{d}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="detail-boundary">
+              <strong>{t.boundaryLabel}</strong><br />
+              {item.boundary[locale]}
+            </div>
+            <a class="detail-source" href={item.source.href} rel="noopener noreferrer">
+              {t.readSource}: {item.source.label} ↗
+            </a>
+          </article>
+        ))}
+      </section>
+
+      <section class="limits-section" id="limits" aria-labelledby="limits-heading">
+        <div class="limits-header">
+          <h2 id="limits-heading">{t.limitsTitle}</h2>
+          <p>{t.limitsIntro}</p>
+        </div>
+        <div class="limits-grid">
+          {t.limitations.map((lim) => (
+            <article class="limit-card">
+              <h3>{lim.title}</h3>
+              <p>{lim.text}</p>
+              <a href={lim.sourceHref} rel="noopener noreferrer">
+                {lim.sourceLabel} ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="footer-grid">
+        <div class="footer-copy">
+          <h2>{t.contactTitle}</h2>
+          <p>{t.contactCopy}</p>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:myke@triangulotec.com.br">
+            <Icon name="mail" />
+            <span>{t.emailLabel}</span>
+          </a>
+          <a href="https://github.com/shishiv" rel="me noopener noreferrer">
+            <Icon name="github" />
+            <span>{t.githubLabel}</span>
+          </a>
+          <a href="https://linkedin.com/in/mykematos" rel="me noopener noreferrer">
+            <Icon name="linkedin" />
+            <span>{t.linkedinLabel}</span>
+          </a>
+        </div>
+        <div class="footer-meta">
+          <span>{t.footerNote}</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Interactive callgraph: click nodes to expand detail panels
+      document.addEventListener("DOMContentLoaded", () => {
+        const nodes = document.querySelectorAll<SVGGElement>(".graph-node");
+        const details = document.querySelectorAll<HTMLElement>(".node-detail");
+        const edges = document.querySelectorAll<SVGPathElement>(".graph-edge");
+        const edgeLabels = document.querySelectorAll<SVGTextElement>(".edge-label");
+
+        let activeNode: string | null = null;
+
+        function activate(nodeId: string | null) {
+          // Reset all
+          nodes.forEach((n) => {
+            n.classList.remove("active");
+            n.setAttribute("aria-expanded", "false");
+          });
+          details.forEach((d) => d.classList.remove("visible"));
+          edges.forEach((e) => e.classList.remove("highlighted"));
+          edgeLabels.forEach((l) => l.classList.remove("highlighted"));
+          document.querySelectorAll(".graph-arrowhead").forEach((a) =>
+            a.classList.remove("highlighted")
+          );
+
+          if (!nodeId || nodeId === activeNode) {
+            activeNode = null;
+            return;
+          }
+
+          activeNode = nodeId;
+
+          // Activate node
+          const node = document.querySelector(`[data-node="${nodeId}"]`);
+          node?.classList.add("active");
+          node?.setAttribute("aria-expanded", "true");
+
+          // Show detail
+          const detail = document.querySelector(`[data-detail="${nodeId}"]`);
+          detail?.classList.add("visible");
+
+          // Highlight connected edges
+          edges.forEach((e) => {
+            const edgeId = e.dataset.edge || "";
+            if (edgeId.includes(nodeId)) {
+              e.classList.add("highlighted");
+            }
+          });
+          edgeLabels.forEach((l) => {
+            const edgeId = l.dataset.edgeLabel || "";
+            if (edgeId.includes(nodeId)) {
+              l.classList.add("highlighted");
+            }
+          });
+        }
+
+        // Node click
+        nodes.forEach((node) => {
+          const id = node.dataset.node || "";
+          node.addEventListener("click", () => activate(id));
+          node.addEventListener("keydown", (e: KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              activate(id);
+            }
+          });
+        });
+
+        // Close buttons
+        document.querySelectorAll("[data-close]").forEach((btn) => {
+          btn.addEventListener("click", () => activate(null));
+        });
+
+        // Escape closes
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && activeNode) {
+            activate(null);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
