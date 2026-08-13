@@ -1,28 +1,7 @@
 ---
-/**
- * CONTRATO DE DIREÇÃO — home
- *
- * THESIS: uma fita de custódia carrega a vida de trabalho em ordem de tempo,
- *   e o que não pode ser provado desfia em vez de sumir. recusa o hero, a
- *   grade de cards e o portfólio-terminal que a categoria sempre entrega.
- * OWN-WORLD: papel de arquivo cinza-buff frio, tinta preta hairline, um
- *   violeta de carimbo contínuo. mono mede, serifa decide, condensada nomeia.
- *   cantos vivos, zero sombra interna, zero tracejado.
- * STORY: o recrutador lê a trajetória num olhar, varre o registro técnico à
- *   direita, abre o que é público e manda e-mail.
- * FIRST VIEWPORT: tarja violeta com o nome e a stack como ficha técnica;
- *   abaixo, a espinha vertical com nós datados, cheios para o que é provado e
- *   em barra para o restrito; à direita, o registro de sistemas.
- * FORM: linha de custódia de proveniência museológica, 4ª da lista ordenada,
- *   escolhida pelo usuário sobre a direção sorteada (caderno de pranchas).
- *   seed 68872683 · challenger exhibition-museum-curation-provenance-ribbon.
- */
 import "../styles/world.css";
-import Spine from "../components/Spine.astro";
-import SpineList from "../components/SpineList.astro";
 import Icon from "../components/Icon.astro";
-import RecentPosts from "../components/RecentPosts.astro";
-import Registry from "../components/Registry.astro";
+import InfraRegistry from "../components/InfraRegistry.astro";
 import { useUi, type Locale } from "../i18n/ui";
 
 interface Props {
@@ -35,10 +14,12 @@ const copy = useUi(locale);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const home = { pt: `${base}/`, en: `${base}/en/` };
 const canonical = new URL(home[locale], Astro.site ?? "https://shishiv.github.io");
+const sourceRoot =
+  "https://github.com/shishiv/infra-examples/blob/c0469a25a6602399ba2107cee5d42d48d12e4c31/README.md";
 ---
 
 <!doctype html>
-<html lang={locale === "pt" ? "pt-BR" : "en"}>
+<html lang={copy.lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +32,7 @@ const canonical = new URL(home[locale], Astro.site ?? "https://shishiv.github.io
     <meta property="og:description" content={copy.description} />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content={canonical.href} />
-    <meta name="theme-color" content="#e4e0d5" />
+    <meta name="theme-color" content="#4b426f" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,51 +41,92 @@ const canonical = new URL(home[locale], Astro.site ?? "https://shishiv.github.io
     />
   </head>
   <body>
-    <main class="folio">
+    <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
+
+    <main class="folio" id="main-content" tabindex="-1">
       <header class="masthead">
-        <h1>myke matos</h1>
-        <p class="stackcard">
-          <b>python</b> · typescript · javascript · sql · c# · go<br />
-          <b>nestjs</b> · next 16 · react 19 · postgres · drizzle · redis · bullmq<br />
-          <b>docker swarm</b> · traefik · linux · gha · ghcr · vercel · azure
-        </p>
+        <div class="masthead-meta">
+          <p class="eyebrow">{copy.eyebrow}</p>
+          <a class="source-shortcut" href={sourceRoot} rel="noopener noreferrer">infra-examples ↗</a>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-heading">
+            <h1>myke matos</h1>
+            <p class="hero-title">{copy.heroTitle}</p>
+          </div>
+          <div class="hero-copy">
+            <p>{copy.heroCopy}</p>
+            <p class="source-note">
+              <span>{copy.sourceIntro}</span>
+              <a href={sourceRoot} rel="noopener noreferrer">{copy.sourceDescription}</a>
+            </p>
+          </div>
+        </div>
+
+        <nav class="site-nav" aria-label={copy.primaryNav}>
+          <a href="#mapa">{copy.mapNav}</a>
+          <a href="#limites">{copy.limitsNav}</a>
+          <a href="#contato">{copy.contactNav}</a>
+          <span class="nav-divider" aria-hidden="true"></span>
+          <a href={home.pt} hreflang="pt-BR" aria-current={locale === "pt" ? "page" : undefined}>pt</a>
+          <a href={home.en} hreflang="en" aria-current={locale === "en" ? "page" : undefined}>en</a>
+        </nav>
       </header>
 
-      <div class="sheetbody">
-        <div class="spine">
-          <Spine locale={locale} />
-          <SpineList locale={locale} />
-        </div>
-        <Registry locale={locale} />
+      <div class="folio-body">
+        <InfraRegistry locale={locale} />
+
+        <section class="limits" id="limites" aria-labelledby="limits-title">
+          <header class="section-heading section-heading-compact">
+            <p class="section-kicker">{copy.limitsKicker}</p>
+            <h2 id="limits-title">{copy.limitsTitle}</h2>
+            <p class="section-intro">{copy.limitsIntro}</p>
+          </header>
+
+          <div class="limits-list">
+            {
+              copy.limitations.map((limitation) => (
+                <article class="limit-item">
+                  <h3>{limitation.title}</h3>
+                  <p>{limitation.text}</p>
+                  <a href={limitation.sourceHref} rel="noopener noreferrer">
+                    {limitation.sourceLabel} <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </section>
       </div>
 
-      <footer class="colophon">
-        <RecentPosts locale={locale} />
-        <nav aria-label={copy.langLabel}>
-          <ul class="social">
-            <li>
-              <a href="mailto:myke@triangulotec.com.br">
-                <Icon name="mail" /> myke@triangulotec.com.br
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/shishiv" rel="me noopener">
-                <Icon name="github" /> github.com/shishiv
-              </a>
-            </li>
-            <li>
-              <a href="https://linkedin.com/in/mykematos" rel="me noopener">
-                <Icon name="linkedin" /> linkedin.com/in/mykematos
-              </a>
-            </li>
-          </ul>
-          <p class="bio">{copy.education} &nbsp;·&nbsp; {copy.training}</p>
-          <p class="langswitch">
-            <a href={home.pt} hreflang="pt-BR" aria-current={locale === "pt" ? "true" : undefined}>pt</a>
-            &nbsp;·&nbsp;
-            <a href={home.en} hreflang="en" aria-current={locale === "en" ? "true" : undefined}>en</a>
-          </p>
-        </nav>
+      <footer class="colophon" id="contato" aria-labelledby="contact-title">
+        <div class="contact-copy">
+          <p class="section-kicker">{copy.contactKicker}</p>
+          <h2 id="contact-title">{copy.contactTitle}</h2>
+          <p>{copy.contactCopy}</p>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:myke@triangulotec.com.br">
+            <Icon name="mail" />
+            <span>{copy.emailLabel}</span>
+          </a>
+          <a href="https://github.com/shishiv" rel="me noopener noreferrer">
+            <Icon name="github" />
+            <span>{copy.githubLabel}</span>
+          </a>
+          <a href="https://linkedin.com/in/mykematos" rel="me noopener noreferrer">
+            <Icon name="linkedin" />
+            <span>{copy.linkedinLabel}</span>
+          </a>
+        </div>
+
+        <div class="footer-meta">
+          <span>{copy.footerNote}</span>
+          <span aria-hidden="true">·</span>
+          <a href={sourceRoot} rel="noopener noreferrer">infra-examples</a>
+        </div>
       </footer>
     </main>
   </body>

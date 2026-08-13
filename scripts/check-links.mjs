@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 /**
- * confere todo link externo que o site exibe.
+ * confere os links externos que a página exibe.
  *
- * o portfólio inteiro se apoia numa promessa: cada item tem prova conferível.
- * um 404 num link exibido custa mais que a ausência do link, porque quebra a
- * credibilidade de tudo que está ao redor. uma promessa sem guarda vale só no
- * dia em que foi feita, então ela vira teste e roda a cada deploy.
- *
- * uso: node scripts/check-links.mjs
+ * o perfil usa links de fonte como recibos. se um caminho de leitura morrer,
+ * o build de verificação falha para que a descrição seja corrigida antes da
+ * publicação.
  */
 
 import { readFile } from "node:fs/promises";
@@ -18,25 +15,28 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const TIMEOUT_MS = 15_000;
 const RETRIES = 1;
 
-/** todo href que aparece no site, com o lugar de onde ele veio. */
+function urlsIn(source) {
+  return [...source.matchAll(/https:\/\/[^"'\s)]+/g)].map(([url]) => url.replace(/[.,]$/, ""));
+}
+
+/** coleta cada URL que aparece na página e registra o arquivo de origem. */
 async function collect() {
   const found = new Map();
   const add = (url, where) => {
     if (!url?.startsWith("http")) return;
+    if (url.startsWith("https://fonts.googleapis.com") || url.startsWith("https://fonts.gstatic.com")) return;
     if (!found.has(url)) found.set(url, new Set());
     found.get(url).add(where);
   };
 
-  const events = JSON.parse(await readFile(join(root, "src/data/events.json"), "utf8"));
-  for (const event of events) {
-    add(event.href, `events.json · ${event.id}`);
-    for (const node of event.cluster ?? []) add(node.href, `events.json · ${event.id}/${node.id}`);
-  }
+  const infra = JSON.parse(await readFile(join(root, "src/data/infra.json"), "utf8"));
+  for (const example of infra) add(example.source.href, `infra.json · ${example.id}`);
 
-  const systems = JSON.parse(await readFile(join(root, "src/data/systems.json"), "utf8"));
-  for (const system of systems) {
-    for (const link of system.links ?? []) add(link.href, `systems.json · ${system.id}`);
-  }
+  const ui = await readFile(join(root, "src/i18n/ui.ts"), "utf8");
+  for (const url of urlsIn(ui)) add(url, "i18n/ui.ts");
+
+  const folio = await readFile(join(root, "src/layouts/Folio.astro"), "utf8");
+  for (const url of urlsIn(folio)) add(url, "layouts/Folio.astro");
 
   return found;
 }
@@ -47,8 +47,7 @@ async function probe(url) {
     for (const method of ["HEAD", "GET"]) {
       try {
         const response = await fetch(url, { method, redirect: "follow", signal });
-        // alguns servidores recusam HEAD e respondem 405; nesse caso o GET decide.
-        if (method === "HEAD" && (response.status === 405 || response.status === 501)) continue;
+        if (method === "HEAD" && !response.ok) continue;
         return { ok: response.ok, status: response.status, final: response.url };
       } catch (error) {
         if (method === "GET" && attempt === RETRIES) {
@@ -78,11 +77,7 @@ for (const result of results) {
 
 const dead = results.filter((result) => !result.ok);
 if (dead.length > 0) {
-  console.error(
-    `\n${dead.length} de ${results.length} links não respondem. ` +
-      `o site afirma que todo item tem prova conferível, então um link morto ` +
-      `é uma afirmação falsa. corrija o endereço ou remova o link.`,
-  );
+  console.error(`\n${dead.length} de ${results.length} links não respondem. remova ou corrija cada endereço.`);
   process.exit(1);
 }
 
