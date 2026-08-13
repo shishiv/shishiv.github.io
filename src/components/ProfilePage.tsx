@@ -59,40 +59,42 @@ export function ProfilePage({ locale }: { locale: Locale }) {
                 aria-live="polite"
                 aria-hidden={!isVisible}
               >
-                <div className="detail-header">
-                  <h2 className="detail-name">{item.name}</h2>
-                  <button
-                    className="detail-close"
-                    onClick={() => setActiveNode(null)}
-                    aria-label={t.closeDetail}
+                <div>
+                  <div className="detail-header">
+                    <h2 className="detail-name">{item.name}</h2>
+                    <button
+                      className="detail-close"
+                      onClick={() => setActiveNode(null)}
+                      aria-label={t.closeDetail}
+                    >
+                      {t.closeDetail} &times;
+                    </button>
+                  </div>
+                  <p className="detail-summary">
+                    {(item.summary as Record<string, string>)[locale]}
+                  </p>
+                  <div className="detail-decisions">
+                    <h4>{t.decisionsLabel}</h4>
+                    <ul>
+                      {(item.decisions as Record<string, string[]>)[locale].map((d, i) => (
+                        <li key={i}>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="detail-boundary">
+                    <strong>{t.boundaryLabel}</strong>
+                    <br />
+                    {(item.boundary as Record<string, string>)[locale]}
+                  </div>
+                  <a
+                    className="detail-source"
+                    href={item.source.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
-                    {t.closeDetail} &times;
-                  </button>
+                    {t.readSource}: {item.source.label} ↗
+                  </a>
                 </div>
-                <p className="detail-summary">
-                  {(item.summary as Record<string, string>)[locale]}
-                </p>
-                <div className="detail-decisions">
-                  <h4>{t.decisionsLabel}</h4>
-                  <ul>
-                    {(item.decisions as Record<string, string[]>)[locale].map((d, i) => (
-                      <li key={i}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="detail-boundary">
-                  <strong>{t.boundaryLabel}</strong>
-                  <br />
-                  {(item.boundary as Record<string, string>)[locale]}
-                </div>
-                <a
-                  className="detail-source"
-                  href={item.source.href}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {t.readSource}: {item.source.label} ↗
-                </a>
               </article>
             );
           })}

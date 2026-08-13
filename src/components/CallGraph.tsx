@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { animate, stagger, createTimeline } from "animejs";
+import { animate } from "animejs";
 import { edges, positions } from "@/data/graph";
 import infra from "@/data/infra.json";
 import type { Locale } from "@/i18n/ui";
@@ -47,66 +47,42 @@ function getMidpoint(fromId: string, toId: string) {
 
 export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const hasAnimated = useRef(false);
+  const prevActive = useRef<string | null>(null);
 
-  // Entrance animation with anime.js v4
+  // Animate on node activation change - the ONE authored moment
   useEffect(() => {
-    if (hasAnimated.current || !svgRef.current) return;
+    if (!svgRef.current) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      svgRef.current.querySelectorAll(".edge-label").forEach((el) => {
-        el.classList.add("visible");
-      });
-      hasAnimated.current = true;
-      return;
-    }
+    if (prefersReduced) return;
 
-    hasAnimated.current = true;
     const svg = svgRef.current;
 
-    // Set initial states
-    const edgePaths = svg.querySelectorAll<SVGPathElement>(".graph-edge");
-    edgePaths.forEach((path) => {
-      const length = path.getTotalLength();
-      path.style.strokeDasharray = `${length}`;
-      path.style.strokeDashoffset = `${length}`;
-    });
+    if (activeNode && activeNode !== prevActive.current) {
+      // Pulse the active node's rect: brief scale bump
+      const nodeEl = svg.querySelector(`[data-node-id="${activeNode}"] rect`);
+      if (nodeEl) {
+        animate(nodeEl, {
+          strokeWidth: [1.5, 3, 2],
+          duration: 350,
+          ease: "outExpo",
+        });
+      }
 
-    const nodeGroups = svg.querySelectorAll<SVGGElement>(".graph-node");
-    nodeGroups.forEach((g) => {
-      g.style.opacity = "0";
-    });
+      // Connected edges: quick stroke-width pulse showing flow
+      const connectedEdges = svg.querySelectorAll(
+        `[data-edge-from="${activeNode}"], [data-edge-to="${activeNode}"]`
+      );
+      if (connectedEdges.length) {
+        animate(connectedEdges, {
+          strokeWidth: [1.5, 3, 2.5],
+          duration: 400,
+          ease: "outExpo",
+        });
+      }
+    }
 
-    const labels = svg.querySelectorAll<SVGTextElement>(".edge-label");
-
-    // Create timeline for orchestrated entrance
-    const tl = createTimeline({
-      defaults: { ease: "outQuart" },
-    });
-
-    // 1. Nodes fade in with stagger
-    tl.add(nodeGroups, {
-      opacity: [0, 1],
-      scale: [0.8, 1],
-      duration: 450,
-      delay: stagger(90),
-    }, 100);
-
-    // 2. Edges draw themselves
-    tl.add(edgePaths, {
-      strokeDashoffset: 0,
-      duration: 700,
-      delay: stagger(100),
-    }, 400);
-
-    // 3. Labels fade in
-    tl.add(labels, {
-      opacity: [0, 1],
-      duration: 350,
-      delay: stagger(50),
-      onBegin: () => labels.forEach((l) => l.classList.add("visible")),
-    }, 900);
-  }, []);
+    prevActive.current = activeNode;
+  }, [activeNode]);
 
   const handleNodeClick = useCallback(
     (id: string) => {
@@ -131,22 +107,26 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
         <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
           <polygon points="0 0, 8 3, 0 6" className="graph-arrowhead" />
         </marker>
-        <marker id="ah-active" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" className="graph-arrowhead highlighted" />
+        <marker id="ah-active" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" className="graph-arrowhead highlighted" />
         </marker>
       </defs>
 
-      {/* Edges */}
+      {/* Edges - visible from the start, with subtle flow animation via CSS */}
       {edges.map((edge) => {
         const mid = getMidpoint(edge.from, edge.to);
         const label = edgeLabels[edge.id] || "";
-        const isHighlighted = activeNode ? edge.id.includes(activeNode) : false;
+        const isHighlighted = activeNode
+          ? edge.from === activeNode || edge.to === activeNode
+          : false;
         return (
           <g key={edge.id}>
             <path
               className={`graph-edge ${isHighlighted ? "highlighted" : ""}`}
               d={buildPath(edge.from, edge.to)}
               markerEnd={isHighlighted ? "url(#ah-active)" : "url(#ah)"}
+              data-edge-from={edge.from}
+              data-edge-to={edge.to}
             />
             {label && (
               <text
@@ -162,7 +142,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
         );
       })}
 
-      {/* Nodes */}
+      {/* Nodes - always visible, no entrance animation */}
       {positions.map((pos) => {
         const item = infra.find((i) => i.id === pos.id);
         const name = item?.name || pos.id;
@@ -175,6 +155,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
           <g
             key={pos.id}
             className={`graph-node ${isActive ? "active" : ""}`}
+            data-node-id={pos.id}
             tabIndex={0}
             role="button"
             aria-expanded={isActive}

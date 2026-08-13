@@ -158,15 +158,17 @@ a {
   stroke: var(--edge);
   stroke-width: 1.5;
   stroke-linecap: round;
-  transition: stroke 200ms ease, stroke-width 200ms ease;
+  stroke-dasharray: 6 4;
+  transition: stroke 250ms ease, stroke-width 250ms ease;
 }
 
 .graph-edge.highlighted {
   stroke: var(--accent);
   stroke-width: 2.5;
+  stroke-dasharray: none;
 }
 
-.graph-arrowhead { fill: var(--edge); transition: fill 200ms ease; }
+.graph-arrowhead { fill: var(--edge); transition: fill 250ms ease; }
 .graph-arrowhead.highlighted { fill: var(--accent); }
 
 .edge-label {
@@ -174,11 +176,10 @@ a {
   font-size: 9px;
   fill: var(--ink-3);
   pointer-events: none;
-  opacity: 0;
+  transition: fill 250ms ease, opacity 250ms ease;
 }
 
-.edge-label.visible { opacity: 1; }
-.edge-label.highlighted { fill: var(--accent); }
+.edge-label.highlighted { fill: var(--accent); opacity: 1; }
 
 .graph-node { cursor: pointer; }
 
@@ -188,7 +189,7 @@ a {
   stroke-width: 1.5;
   rx: 6;
   ry: 6;
-  transition: fill 200ms ease, stroke 200ms ease;
+  transition: fill 250ms ease, stroke 250ms ease, stroke-width 250ms ease;
 }
 
 .graph-node:hover rect { stroke: var(--ink-2); }
@@ -224,20 +225,21 @@ a {
   background: var(--surface);
   border: 1px solid var(--node-active-border);
   border-radius: 8px;
+  display: grid;
+  grid-template-rows: 0fr;
   opacity: 0;
-  transform: translateY(0.5rem);
-  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+  transition: grid-template-rows 350ms var(--ease-out), opacity 300ms ease;
   pointer-events: none;
-  height: 0;
+}
+
+.node-detail > * {
   overflow: hidden;
 }
 
 .node-detail.visible {
+  grid-template-rows: 1fr;
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
-  height: auto;
-  overflow: visible;
 }
 
 .detail-header {
@@ -472,7 +474,22 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .node-detail { transition: none; }
-  .graph-edge { transition: none; }
+  .graph-edge { transition: none; animation: none; }
+  .graph-node rect { transition: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .graph-edge {
+    animation: edge-flow 8s linear infinite;
+  }
+
+  .graph-edge.highlighted {
+    animation: none;
+  }
+}
+
+@keyframes edge-flow {
+  to { stroke-dashoffset: -40; }
 }
 
 @media (prefers-contrast: more) {
