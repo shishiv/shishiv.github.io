@@ -5,6 +5,12 @@ description: perfil tecnico publico - callgraph interativo de infraestrutura
 
 # design system: the callgraph
 
+## stack
+
+Next.js 15 (App Router, static export for GitHub Pages).
+React 19. anime.js v4 for graph entrance animations.
+Plain CSS (no Tailwind, no CSS modules).
+
 ## direction
 
 The page is one interactive callgraph. The first viewport shows how 6
@@ -82,9 +88,13 @@ Real dependencies between infra-examples subsystems:
 
 ## motion
 
-- Detail panel entrance: opacity + translateY (300ms, ease-out)
-- Edge/node transitions: stroke/fill color (200ms, ease)
-- All motion respects prefers-reduced-motion: reduce
+- Graph entrance (anime.js timeline):
+  - Nodes fade in + scale from 0.8 with 90ms stagger (450ms each, outQuart)
+  - Edges draw themselves via strokeDashoffset (700ms each, 100ms stagger, outQuart)
+  - Edge labels fade in after edges complete (350ms, 50ms stagger)
+- Detail panel: opacity + translateY transition (300ms, ease-out)
+- Edge/node state transitions: stroke/fill color (200ms, ease)
+- All motion respects prefers-reduced-motion: reduce (instant show, no animation)
 
 ## accessibility
 
