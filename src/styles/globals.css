@@ -172,13 +172,12 @@ a {
 /* Flow particles - small dots traveling along edges */
 .flow-particle {
   fill: var(--accent);
-  opacity: 0.6;
+  opacity: 0.45;
 }
 
 .flow-particle-secondary {
   fill: var(--accent);
-  opacity: 0.35;
-  r: 2;
+  opacity: 0.25;
 }
 
 .edge-label {

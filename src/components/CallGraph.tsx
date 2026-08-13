@@ -209,7 +209,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
             {/* Flow particle - travels along the edge path */}
             <circle
               className="flow-particle"
-              r="2.5"
+              r="1.5"
               data-particle-edge={edge.id}
             >
               <animateMotion
@@ -284,7 +284,7 @@ function startFlowParticles(svg: SVGSVGElement) {
     const d = path.getAttribute("d");
     if (!d) return;
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("r", "2");
+    circle.setAttribute("r", "1.2");
     circle.setAttribute("class", "flow-particle flow-particle-secondary");
     const motion = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
     motion.setAttribute("dur", `${4 + Math.random() * 2}s`);
