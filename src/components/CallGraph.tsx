@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { animate } from "animejs";
+import { animate, stagger, createTimeline } from "animejs";
 import { edges, positions } from "@/data/graph";
 import infra from "@/data/infra.json";
 import type { Locale } from "@/i18n/ui";
@@ -45,42 +45,120 @@ function getMidpoint(fromId: string, toId: string) {
   return { x: mx, y: my };
 }
 
+/**
+ * Topological order for the reveal animation.
+ * Systems appear in dependency order: foundation first, dependents after.
+ */
+const REVEAL_ORDER = [
+  { nodeId: "bash-ops", delay: 0 },
+  { nodeId: "github-actions", delay: 400 },
+  { nodeId: "docker-swarm", delay: 700 },
+  { nodeId: "playwright", delay: 900 },
+  { nodeId: "nextjs", delay: 1200 },
+  { nodeId: "drizzle", delay: 1500 },
+];
+
 export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const hasAnimated = useRef(false);
   const prevActive = useRef<string | null>(null);
 
-  // Animate on node activation change - the ONE authored moment
+  // Topology-ordered reveal animation
+  useEffect(() => {
+    if (hasAnimated.current || !svgRef.current) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      hasAnimated.current = true;
+      return;
+    }
+    hasAnimated.current = true;
+    const svg = svgRef.current;
+
+    // Hide everything initially
+    const nodeEls = svg.querySelectorAll<SVGGElement>(".graph-node");
+    const edgeEls = svg.querySelectorAll<SVGPathElement>(".graph-edge");
+    const labelEls = svg.querySelectorAll<SVGTextElement>(".edge-label");
+    const particleEls = svg.querySelectorAll<SVGCircleElement>(".flow-particle");
+
+    nodeEls.forEach((n) => { n.style.opacity = "0"; });
+    edgeEls.forEach((e) => {
+      const len = e.getTotalLength();
+      e.style.strokeDasharray = `${len}`;
+      e.style.strokeDashoffset = `${len}`;
+    });
+    labelEls.forEach((l) => { l.style.opacity = "0"; });
+    particleEls.forEach((p) => { p.style.opacity = "0"; });
+
+    // Reveal nodes in topological order
+    REVEAL_ORDER.forEach(({ nodeId, delay }) => {
+      const node = svg.querySelector(`[data-node-id="${nodeId}"]`) as SVGGElement;
+      if (!node) return;
+
+      animate(node, {
+        opacity: [0, 1],
+        scale: [0.9, 1],
+        duration: 400,
+        delay,
+        ease: "outExpo",
+      });
+
+      // Draw outgoing edges when the source node appears
+      const outEdges = svg.querySelectorAll<SVGPathElement>(
+        `[data-edge-from="${nodeId}"]`
+      );
+      outEdges.forEach((edge, i) => {
+        animate(edge, {
+          strokeDashoffset: [edge.getTotalLength(), 0],
+          duration: 600,
+          delay: delay + 200 + i * 100,
+          ease: "outQuart",
+        });
+      });
+    });
+
+    // Labels fade in after structure is built
+    animate(labelEls, {
+      opacity: [0, 1],
+      duration: 300,
+      delay: stagger(40, { start: 1800 }),
+      ease: "outCubic",
+    });
+
+    // Start flow particles after reveal completes
+    setTimeout(() => {
+      particleEls.forEach((p) => { p.style.opacity = "1"; });
+      startFlowParticles(svg);
+    }, 2200);
+  }, []);
+
+  // Interaction animation on node activation
   useEffect(() => {
     if (!svgRef.current) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
-
     const svg = svgRef.current;
 
     if (activeNode && activeNode !== prevActive.current) {
-      // Pulse the active node's rect: brief scale bump
-      const nodeEl = svg.querySelector(`[data-node-id="${activeNode}"] rect`);
-      if (nodeEl) {
-        animate(nodeEl, {
+      // Pulse connected edges
+      const connected = svg.querySelectorAll(
+        `[data-edge-from="${activeNode}"], [data-edge-to="${activeNode}"]`
+      );
+      animate(connected, {
+        strokeWidth: [1.5, 3.5, 2.5],
+        duration: 450,
+        ease: "outExpo",
+      });
+
+      // Scale pulse on active node
+      const nodeRect = svg.querySelector(`[data-node-id="${activeNode}"] rect`);
+      if (nodeRect) {
+        animate(nodeRect, {
           strokeWidth: [1.5, 3, 2],
           duration: 350,
           ease: "outExpo",
         });
       }
-
-      // Connected edges: quick stroke-width pulse showing flow
-      const connectedEdges = svg.querySelectorAll(
-        `[data-edge-from="${activeNode}"], [data-edge-to="${activeNode}"]`
-      );
-      if (connectedEdges.length) {
-        animate(connectedEdges, {
-          strokeWidth: [1.5, 3, 2.5],
-          duration: 400,
-          ease: "outExpo",
-        });
-      }
     }
-
     prevActive.current = activeNode;
   }, [activeNode]);
 
@@ -112,7 +190,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
         </marker>
       </defs>
 
-      {/* Edges - visible from the start, with subtle flow animation via CSS */}
+      {/* Edges */}
       {edges.map((edge) => {
         const mid = getMidpoint(edge.from, edge.to);
         const label = edgeLabels[edge.id] || "";
@@ -128,6 +206,18 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
               data-edge-from={edge.from}
               data-edge-to={edge.to}
             />
+            {/* Flow particle - travels along the edge path */}
+            <circle
+              className="flow-particle"
+              r="2.5"
+              data-particle-edge={edge.id}
+            >
+              <animateMotion
+                dur={`${3 + Math.random() * 2}s`}
+                repeatCount="indefinite"
+                path={buildPath(edge.from, edge.to)}
+              />
+            </circle>
             {label && (
               <text
                 className={`edge-label ${isHighlighted ? "highlighted" : ""}`}
@@ -142,7 +232,7 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
         );
       })}
 
-      {/* Nodes - always visible, no entrance animation */}
+      {/* Nodes */}
       {positions.map((pos) => {
         const item = infra.find((i) => i.id === pos.id);
         const name = item?.name || pos.id;
@@ -180,4 +270,28 @@ export function CallGraph({ locale, edgeLabels, onNodeSelect, activeNode }: Prop
       })}
     </svg>
   );
+}
+
+/**
+ * Start continuous flow particles on all edges.
+ * Each particle travels along its edge path showing data flow direction.
+ */
+function startFlowParticles(svg: SVGSVGElement) {
+  // The SVG animateMotion handles continuous flow.
+  // This function adds a second, offset particle per edge for density.
+  const edgePaths = svg.querySelectorAll<SVGPathElement>(".graph-edge");
+  edgePaths.forEach((path) => {
+    const d = path.getAttribute("d");
+    if (!d) return;
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("r", "2");
+    circle.setAttribute("class", "flow-particle flow-particle-secondary");
+    const motion = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
+    motion.setAttribute("dur", `${4 + Math.random() * 2}s`);
+    motion.setAttribute("repeatCount", "indefinite");
+    motion.setAttribute("path", d);
+    motion.setAttribute("begin", `${1 + Math.random()}s`);
+    circle.appendChild(motion);
+    path.parentElement?.appendChild(circle);
+  });
 }

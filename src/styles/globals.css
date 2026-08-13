@@ -158,28 +158,38 @@ a {
   stroke: var(--edge);
   stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 6 4;
   transition: stroke 250ms ease, stroke-width 250ms ease;
 }
 
 .graph-edge.highlighted {
   stroke: var(--accent);
   stroke-width: 2.5;
-  stroke-dasharray: none;
 }
 
 .graph-arrowhead { fill: var(--edge); transition: fill 250ms ease; }
 .graph-arrowhead.highlighted { fill: var(--accent); }
+
+/* Flow particles - small dots traveling along edges */
+.flow-particle {
+  fill: var(--accent);
+  opacity: 0.6;
+}
+
+.flow-particle-secondary {
+  fill: var(--accent);
+  opacity: 0.35;
+  r: 2;
+}
 
 .edge-label {
   font-family: var(--font-mono);
   font-size: 9px;
   fill: var(--ink-3);
   pointer-events: none;
-  transition: fill 250ms ease, opacity 250ms ease;
+  transition: fill 250ms ease;
 }
 
-.edge-label.highlighted { fill: var(--accent); opacity: 1; }
+.edge-label.highlighted { fill: var(--accent); }
 
 .graph-node { cursor: pointer; }
 
@@ -490,22 +500,19 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .node-detail { transition: none; }
-  .graph-edge { transition: none; animation: none; }
+  .graph-edge { transition: none; }
   .graph-node rect { transition: none; }
+  .flow-particle, .flow-particle-secondary { display: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .graph-edge {
-    animation: edge-flow 8s linear infinite;
-  }
-
   .graph-edge.highlighted {
-    animation: none;
+    filter: drop-shadow(0 0 3px rgba(26, 92, 92, 0.4));
   }
-}
 
-@keyframes edge-flow {
-  to { stroke-dashoffset: -40; }
+  .graph-node.active rect {
+    filter: drop-shadow(0 0 6px rgba(26, 92, 92, 0.25));
+  }
 }
 
 @media (prefers-contrast: more) {
