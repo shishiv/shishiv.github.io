@@ -17,6 +17,8 @@ PRODUCT.md
 
 # build
 dist/
+out/
+.next/
 .astro/
 node_modules/
 .env

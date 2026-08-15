@@ -30,8 +30,8 @@ test("every record keeps Portuguese and English semantically paired", () => {
 
 test("the public profile does not use the unsupported engineer title", async () => {
   const files = [
-    "src/layouts/Folio.astro",
-    "src/components/InfraRegistry.astro",
+    "src/components/ProfilePage.tsx",
+    "src/components/CallGraph.tsx",
     "src/i18n/ui.ts",
     "src/data/infra.json",
   ];
