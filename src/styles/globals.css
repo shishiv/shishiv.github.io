@@ -67,6 +67,18 @@ a {
   outline-offset: 3px;
 }
 
+.legacy-redirect {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: #07080b;
+  color: #f1efe9;
+  font-family: var(--font-display);
+}
+.legacy-redirect p { max-width: 42ch; margin: 0; text-align: center; }
+.legacy-redirect a { color: #ff6842; }
+
 /* Founder profile */
 .founder-page {
   --founder-bg: #07080b;
