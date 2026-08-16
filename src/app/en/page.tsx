@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProfilePage } from "@/components/ProfilePage";
+import { FounderProfilePage } from "@/components/FounderProfilePage";
 import { ui } from "@/i18n/ui";
 
 export const metadata: Metadata = {
@@ -8,11 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function EnPage() {
-  return (
-    <html lang="en">
-      <body>
-        <ProfilePage locale="en" />
-      </body>
-    </html>
-  );
+  return <FounderProfilePage locale="en" />;
 }

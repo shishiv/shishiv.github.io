@@ -32,11 +32,16 @@ async function collect() {
   const infra = JSON.parse(await readFile(join(root, "src/data/infra.json"), "utf8"));
   for (const example of infra) add(example.source.href, `infra.json · ${example.id}`);
 
-  const ui = await readFile(join(root, "src/i18n/ui.ts"), "utf8");
-  for (const url of urlsIn(ui)) add(url, "i18n/ui.ts");
-
-  const folio = await readFile(join(root, "src/layouts/Folio.astro"), "utf8");
-  for (const url of urlsIn(folio)) add(url, "layouts/Folio.astro");
+  const publicFiles = [
+    "src/i18n/ui.ts",
+    "src/components/FounderProfilePage.tsx",
+    "src/components/CaseIndexPage.tsx",
+    "src/components/GalaxyHero.tsx",
+  ];
+  for (const file of publicFiles) {
+    const source = await readFile(join(root, file), "utf8");
+    for (const url of urlsIn(source)) add(url, file);
+  }
 
   return found;
 }

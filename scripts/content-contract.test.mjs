@@ -28,15 +28,17 @@ test("every record keeps Portuguese and English semantically paired", () => {
   }
 });
 
-test("the public profile does not use the unsupported engineer title", async () => {
+test("the public profile uses the approved founder and product positioning", async () => {
   const files = [
-    "src/components/ProfilePage.tsx",
-    "src/components/CallGraph.tsx",
+    "src/components/FounderProfilePage.tsx",
+    "src/components/GalaxyHero.tsx",
+    "src/components/CaseIndexPage.tsx",
     "src/i18n/ui.ts",
-    "src/data/infra.json",
   ];
   const text = await Promise.all(files.map((file) => readFile(join(root, file), "utf8"))).then((parts) =>
     parts.join("\n"),
   );
-  assert.doesNotMatch(text, /\bengineer\b|\bengenheir/i);
+  assert.match(text, /founder\s*\/\s*cto/i);
+  assert.match(text, /product engineer/i);
+  assert.doesNotMatch(text, /full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i);
 });

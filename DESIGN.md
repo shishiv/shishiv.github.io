@@ -1,112 +1,129 @@
 ---
 name: myke matos
-description: perfil tecnico publico - callgraph interativo de infraestrutura
+description: founder / cto portfolio with case-led orbital archive
 ---
 
-# design system: the callgraph
+# design system: orbital archive
 
 ## stack
 
-Next.js 15 (App Router, static export for GitHub Pages).
-React 19. anime.js v4 for graph entrance animations.
-Plain CSS (no Tailwind, no CSS modules).
-
-## direction
-
-The page is one interactive callgraph. The first viewport shows how 6
-infrastructure systems connect via labeled dependency arrows. Clicking any
-node reveals its decisions, boundaries, and source link. Architecture
-demonstrated, not described.
-
-The visual world emerges from information design, not from any external
-metaphor. Beauty comes from typography, spacing, and purposeful interaction.
+Next.js 15 App Router with static export, React 19, TypeScript, Anime.js 4 and plain CSS. The project does not use Tailwind.
 
 ## mode
 
-Persuade. The visitor decides and acts. The page earns attention by showing
-architecture immediately and earns the action (email about a remote role) by
-proving operational capability through real code.
+Persuade + Experience. The home establishes Myke as a Founder / CTO who works across product, engineering and operations. It should make the person, thesis and selected work legible before technical documentation.
 
-## tokens
+The evidence-backed professional claim is: “I take messy real-world problems through the whole loop: find the constraint, change the system, test the path, and make it run.” Product, design, research and technology are means inside that loop, not narrower substitutes for it.
 
-- ground: `#f7f6f3` (warm light)
-- surface: `#ffffff` (panels, expanded details)
-- ink: `#1c1c1c` (primary text)
-- ink-2: `#4a4a4a` (secondary text)
-- ink-3: `#7a7a7a` (tertiary, labels)
-- accent: `#1a5c5c` (deep teal - interaction, active states)
-- accent-light: `#eaf5f5` (boundary callouts, active node bg)
-- node-bg: `#f5f4f1`
-- node-border: `#d4d3cf`
-- edge: `rgba(28, 28, 28, 0.55)`
+## direction
 
-## typography
+A dark editorial archive with a persistent narrow rail and one viewport of content at a time. The visual world combines restrained orbital geometry, a sans + serif italic + mono type system and real project identities. Lowercase is intentional.
 
-- display: Bricolage Grotesque (variable, optical sizes 12-96, weights 400/700)
-- body: Literata (variable, optical sizes 7-72, weights 400/600)
-- mono: JetBrains Mono (weights 400/600) - source paths and code only
-
-Type is never used as costume. Mono appears only for genuine code references
-(source paths, commit hashes, edge labels). Display carries headings and node
-names. Body carries prose and decisions.
+The home is not an infrastructure dashboard. Technical architecture remains available on a separate documentary route.
 
 ## structure
 
-1. Sticky header: name + positioning statement + navigation (anchors + locale)
-2. Graph section (first viewport):
-   - Brief context sentence
-   - SVG callgraph (viewBox 1000x480, 6 nodes, 6 edges with labels)
-   - Detail panels (one per node, shown on click)
-3. Limits section: 3 explicit boundaries with source links
-4. Footer: CTA (email about remote work), contact links, attribution
+Desktop home:
+
+1. Persistent rail: identity, cases, personal about, articles and contact.
+2. Cases slide, selected by default:
+   - positioning statement;
+   - orbital stack graph connecting related frameworks, data, delivery and operations technologies;
+   - no project cards or case controls on the home slide.
+3. About slide:
+   - one personal statement grounded in current study, research and product work;
+   - three ruled notes — curiosity, continuity and encounter — as extensions of that narrative, never service cards;
+   - no contact links.
+4. Contact slide:
+   - direct conversation is separated from public work;
+   - email is the primary action and each full row explains the destination before activation.
+5. Cases slide: the editorial index renders inside the persistent rail shell and owns its own vertical scroll.
+6. Deep-link case indexes:
+   - `/case/`;
+   - `/en/case/`.
+7. Legacy architecture routes redirect to the matching case index.
+
+At 1268 × 768, every desktop slide fits exactly one viewport and the cases tabs touch the bottom edge. The document must not scroll horizontally.
+
+## content hierarchy
+
+The home only uses facts that support positioning, work or proof. Biographical details, metrics and arguments that need context belong in cases or future articles, not as isolated fragments.
+
+“Construir é só metade” remains the editorial headline, while its supporting sentence must name the full method: restriction discovery, system change, path testing and operation. Cases must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
+
+Case copy states the product context and responsibility. It does not claim revenue, scale, uptime, adoption or institutional endorsement.
+
+## typography
+
+- Display: Source Sans 3.
+- Editorial contrast: Source Serif 4 italic.
+- Technical labels and architecture paths: IBM Plex Mono.
+
+Display tracking stays between -0.02em and -0.04em. Body copy remains compact and readable; technical labels never replace explanatory prose.
+
+## color
+
+- background: `#07080b`;
+- surface: `#0b0d12`;
+- primary text: `#f1efe9`;
+- secondary text: `#a7acb6`;
+- structural line: `#292d36`;
+- accent: `#ff6842`.
+
+Individual cases may tint orbit lines and selected stars from their identity, while text and interaction retain the shared system.
 
 ## interaction
 
-- Click/tap a node: highlights it and connected edges, shows detail panel below
-- Only one node expanded at a time
-- Close via button, Escape key, or clicking another node
-- Keyboard: nodes are focusable (tabindex), Enter/Space activates
-- Connected edges highlight in accent color on node activation
-
-## graph topology
-
-Real dependencies between infra-examples subsystems:
-- bash-ops → github-actions (runner bootstrap)
-- bash-ops → docker-swarm (operates deploy)
-- github-actions → docker-swarm (publishes image)
-- github-actions → playwright (runs tests)
-- playwright → nextjs (tests contract)
-- nextjs → drizzle (data layer)
-
-## responsive behavior
-
-- Desktop (>768px): full graph visible in viewport, detail panels below
-- Tablet/mobile (<=768px): graph has min-width 600px, horizontally scrollable
-  within its container. Nodes remain tappable (56px height).
-- Small mobile (<=480px): header stacks, graph area taller to show more
-- Footer stacks on narrow viewports
+- Rail buttons switch between Cases, About and Contact without leaving the page.
+- Cases renders the editorial index inside the rail shell; `/case/` and `/en/case/` remain deep-linkable standalone routes.
+- Stack logos support pointer, focus, Enter and Space interaction.
+- Hover/focus previews the selected technology, its direct neighbors and connecting paths; click pins it for touch and pointer users.
+- Automatic cycling stops after a deliberate selection and under reduced motion.
 
 ## motion
 
-- Graph entrance (anime.js timeline):
-  - Nodes fade in + scale from 0.8 with 90ms stagger (450ms each, outQuart)
-  - Edges draw themselves via strokeDashoffset (700ms each, 100ms stagger, outQuart)
-  - Edge labels fade in after edges complete (350ms, 50ms stagger)
-- Detail panel: opacity + translateY transition (300ms, ease-out)
-- Edge/node state transitions: stroke/fill color (200ms, ease)
-- All motion respects prefers-reduced-motion: reduce (instant show, no animation)
+- Slide navigation uses an interruptible WAAPI transition: `translateX(±18px)` + opacity, 180ms, `cubic-bezier(0.23, 1, 0.32, 1)`. Reduced motion keeps only a 160ms opacity transition.
+- Technology relationships use SVG line drawing.
+- Three neutral orbital tracks establish depth; curved relationship paths carry the semantic network without reading as infrastructure topology.
+- Only the selected stack logo, direct neighbors and their paths receive color, a restrained aura and offset depth.
+- Node positions stay fixed for spatial consistency; inner visual wrappers may scale for hover, press and active feedback without overwriting SVG placement transforms.
+- A compact editorial readout names the focused technology and reconnects the stack to the thesis: tools change while the operating loop remains.
+- `prefers-reduced-motion` starts case cycling paused, removes spatial movement and keeps a short opacity transition.
+
+## responsive behavior
+
+Desktop (over 800px): persistent rail, one-viewport slides, parallel text/visual relationships.
+
+Mobile (800px and below):
+
+- identity and navigation become a compact top header;
+- core navigation remains present and horizontally arranged;
+- cases become a vertical reading flow;
+- the orbital graphic moves behind and away from body copy;
+- case narrative receives a protected surface;
+- four case tabs stack as full-width touch targets;
+- About fits one viewport at 390 × 844;
+- no horizontal overflow.
+
+Mobile is not a scaled desktop composition.
 
 ## accessibility
 
-- Skip link to graph section
-- SVG has role="img" and aria-label
-- Nodes have role="button", aria-expanded, aria-label with name and title
-- Detail panels use aria-live="polite"
-- Visible focus ring (2px solid accent, 3px offset)
-- All touch targets >= 44px (nodes are 56px tall)
-- No information conveyed by color alone (edges have labels, boundaries have text)
+- Skip link targets main content.
+- Rail state uses `aria-current` and a non-color marker.
+- Case controls use `tablist`, `tab`, `aria-selected` and `aria-controls`.
+- Case content is a live `tabpanel`.
+- Interactive targets are at least 44px.
+- Focus rings remain visible.
+- Hover motion is gated to fine pointers.
+- Reduced motion is implemented in CSS and runtime behavior.
 
-## content source
+## case articles
 
-All factual content comes from infra-examples repo, pinned commit c0469a25.
-Data file: src/data/infra.json. I18n: src/i18n/ui.ts.
+`/case/` is the editorial index for articles organized as situation → constraint → system change → path test → operation → evidence limits. Architecture is supporting evidence for a decision under constraints, not the article's central claim. The legacy `/arquitetura/` route redirects there; the superseded callgraph implementation is not retained.
+
+The index exposes that reading method once, then lets each case lead with identity, an editorial thesis and factual context. Architecture sits below the narrative as secondary metadata. Rows do not pretend to be links until a real article destination exists.
+
+## publication boundary
+
+Project logos identify cases; they do not imply endorsement. Scapola and UEMG assets require final authorization/context review before public release. The page must not add claims unsupported by primary evidence.
