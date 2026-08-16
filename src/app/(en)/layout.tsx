@@ -3,13 +3,13 @@ import "@/styles/globals.css";
 import { ui } from "@/i18n/ui";
 
 export const metadata: Metadata = {
-  title: ui.pt.title,
-  description: ui.pt.description,
+  title: ui.en.title,
+  description: ui.en.description,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function EnglishRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

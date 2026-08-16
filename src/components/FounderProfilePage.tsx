@@ -91,6 +91,8 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
             brandsLabel={t.brandsLabel}
             focusLabel={t.stackFocusLabel}
             focusNote={t.stackFocusNote}
+            selectedLabel={t.stackSelectedLabel}
+            relatedLabel={t.stackRelatedLabel}
           />
           </> : null}
 
