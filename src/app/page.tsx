@@ -1,5 +1,5 @@
-import { ProfilePage } from "@/components/ProfilePage";
+import { FounderProfilePage } from "@/components/FounderProfilePage";
 
 export default function Home() {
-  return <ProfilePage locale="pt" />;
+  return <FounderProfilePage locale="pt" />;
 }
