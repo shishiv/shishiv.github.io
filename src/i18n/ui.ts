@@ -28,6 +28,8 @@ export const ui = {
     brandsLabel: "tecnologias relacionadas na stack de produto e operação",
     stackFocusLabel: "stack em foco",
     stackFocusNote: "ferramentas mudam. o ciclo permanece.",
+    stackSelectedLabel: "selecionada",
+    stackRelatedLabel: "tecnologia relacionada",
     workTitle: "trabalhos e evidências",
     caseArchitectureLabel: "arquitetura do case",
     workItems: [
@@ -178,6 +180,8 @@ export const ui = {
     brandsLabel: "related technologies across the product and operations stack",
     stackFocusLabel: "stack in focus",
     stackFocusNote: "tools change. the loop remains.",
+    stackSelectedLabel: "selected",
+    stackRelatedLabel: "related technology",
     workTitle: "work and evidence",
     caseArchitectureLabel: "case architecture",
     workItems: [

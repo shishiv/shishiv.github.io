@@ -110,9 +110,10 @@ Mobile is not a scaled desktop composition.
 ## accessibility
 
 - Skip link targets main content.
+- Portuguese and English route groups emit the correct document-level `lang` in static HTML.
 - Rail state uses `aria-current` and a non-color marker.
-- Case controls use `tablist`, `tab`, `aria-selected` and `aria-controls`.
-- Case content is a live `tabpanel`.
+- Stack nodes expose locale-matched accessible names and remain keyboard-selectable.
+- Automatic stack cycling never writes to an ARIA live region.
 - Interactive targets are at least 44px.
 - Focus rings remain visible.
 - Hover motion is gated to fine pointers.

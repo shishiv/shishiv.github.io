@@ -10,6 +10,8 @@ interface GalaxyHeroProps {
   brandsLabel: string;
   focusLabel: string;
   focusNote: string;
+  selectedLabel: string;
+  relatedLabel: string;
 }
 
 const stackNodes = [
@@ -59,6 +61,8 @@ export function GalaxyHero({
   brandsLabel,
   focusLabel,
   focusNote,
+  selectedLabel,
+  relatedLabel,
 }: GalaxyHeroProps) {
   const rootRef = useRef<HTMLElement>(null);
   const hasDrawnRef = useRef(false);
@@ -113,6 +117,11 @@ export function GalaxyHero({
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const allLines = root.querySelectorAll<SVGPathElement>(".stack-edge");
+    allLines.forEach((line) => {
+      line.style.strokeDasharray = "none";
+      line.style.strokeDashoffset = "0";
+    });
     const lines = root.querySelectorAll<SVGPathElement>(".stack-edge.active");
     const isAutomaticSelection = preview === null && !pinned && selected !== previousSelectedRef.current;
     const shouldDraw = !reducedMotion && preview === null && (!hasDrawnRef.current || isAutomaticSelection);
@@ -140,7 +149,13 @@ export function GalaxyHero({
       }));
     });
     hasDrawnRef.current = true;
-    return () => animations.forEach((animation) => animation.pause());
+    return () => {
+      animations.forEach((animation) => animation.pause());
+      lines.forEach((line) => {
+        line.style.strokeDasharray = "none";
+        line.style.strokeDashoffset = "0";
+      });
+    };
   }, [active, pinned, preview, reducedMotion, selected]);
 
   return (
@@ -189,7 +204,7 @@ export function GalaxyHero({
                   transform={`translate(${node.x} ${node.y})`}
                   role="button"
                   tabIndex={0}
-                  aria-label={`${node.label}: ${isActive ? "selecionada" : "tecnologia relacionada"}`}
+                  aria-label={`${node.label}: ${isActive ? selectedLabel : relatedLabel}`}
                   onPointerEnter={() => setPreview(index)}
                   onPointerLeave={() => setPreview(null)}
                   onFocus={() => setPreview(index)}
@@ -224,7 +239,6 @@ export function GalaxyHero({
           <strong>{activeNode.label}</strong>
           <small>{focusNote}</small>
         </div>
-        <span className="visually-hidden" role="status" aria-live="polite">{activeNode.label}</span>
       </div>
     </section>
   );
