@@ -68,6 +68,7 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
             <button type="button" aria-current={activeSection === "cases" ? "page" : undefined} onClick={() => showSection("cases")}>{t.workNav}</button>
             <button type="button" aria-current={activeSection === "trajectory" ? "page" : undefined} onClick={() => showSection("trajectory")}>{t.trajectoryNav}</button>
             <button type="button" aria-current={activeSection === "articles" ? "page" : undefined} onClick={() => showSection("articles")}>{t.articlesNav}</button>
+            <a href="/uemg/">{t.uemgNav}</a>
             <button type="button" aria-current={activeSection === "contact" ? "page" : undefined} onClick={() => showSection("contact")}>{t.contactNav}</button>
           </nav>
 

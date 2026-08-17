@@ -17,6 +17,7 @@ export const ui = {
     workNav: "home",
 
     articlesNav: "cases",
+    uemgNav: "caderno UEMG",
     caseIndexTitleFirst: "cases,",
     caseIndexTitleSecond: "restrições e sistemas.",
     caseIndexIntro:
@@ -169,6 +170,7 @@ export const ui = {
     workNav: "home",
 
     articlesNav: "cases",
+    uemgNav: "UEMG notebook",
     caseIndexTitleFirst: "cases,",
     caseIndexTitleSecond: "constraints and systems.",
     caseIndexIntro:

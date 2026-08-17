@@ -37,6 +37,7 @@ async function collect() {
     "src/components/FounderProfilePage.tsx",
     "src/components/CaseIndexPage.tsx",
     "src/components/GalaxyHero.tsx",
+    "src/content/uemg-lessons.ts",
   ];
   for (const file of publicFiles) {
     const source = await readFile(join(root, file), "utf8");
