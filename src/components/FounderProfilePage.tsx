@@ -148,7 +148,7 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
                     <strong>GitHub ↗</strong>
                     <small>{t.contactGithubNote}</small>
                   </a>
-                  <a href="http://lattes.cnpq.br/0092223865139147" rel="me noopener noreferrer" target="_blank">
+                  <a href="http://lattes.cnpq.br/8288109750417853" rel="me noopener noreferrer" target="_blank">
                     <strong>Lattes ↗</strong>
                     <small>{t.contactLattesNote}</small>
                   </a>
