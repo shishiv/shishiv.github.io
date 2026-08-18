@@ -20,6 +20,12 @@
   Comparação acadêmica entre Hobbes e Locke sobre autoridade, consentimento e obrigação política.
 - [_Cultura: um conceito antropológico_ - Companhia das Letras/Zahar](https://www.companhiadasletras.com.br/livro/9788571104389/cultura-um-conceito-antropologico)
   Página oficial da editora para o livro de Roque de Barros Laraia. Usar como entrada para o conceito antropológico de cultura.
+- [Voltaire, “Préjugés” - Bibliotheca Augustana](https://www.hs-augsburg.de/homes/harsch/gallica/Chronologie/18siecle/Voltaire/vol_dp64.html)
+  Texto francês do verbete publicado no _Dictionnaire philosophique_ de 1764. Usar na aula sobre preconceito e julgamento.
+- [ENADE 2021: provas e gabaritos - INEP](https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enade/provas-e-gabaritos/2021)
+  Cadernos oficiais para conferir as observações, numeração e redação das questões.
+- [Socrates - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/socrates/)
+  Fonte acadêmica para cronologia e contexto de Sócrates. Usar na conferência factual das questões.
 
 ## Wisdom (Communities)
 

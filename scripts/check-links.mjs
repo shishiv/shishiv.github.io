@@ -38,6 +38,8 @@ async function collect() {
     "src/components/CaseIndexPage.tsx",
     "src/components/GalaxyHero.tsx",
     "src/content/uemg-lessons.ts",
+    "src/app/(pt)/uemg/direitos-humanos/aulas/2/page.tsx",
+    "src/app/(pt)/uemg/enade/aulas/1/page.tsx",
   ];
   for (const file of publicFiles) {
     const source = await readFile(join(root, file), "utf8");

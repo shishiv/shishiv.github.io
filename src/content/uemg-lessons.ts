@@ -21,8 +21,10 @@ export const uemgLessonOneHtml = `
       <nav class="course-nav" aria-label="caderno da disciplina">
         <ul>
           <li><a href="/" aria-label="voltar ao portfólio">myke matos</a></li>
-          <li><a href="/uemg/" aria-current="page">caderno UEMG</a></li>
-          <li><a href="./reference/vida-dignidade/">referência rápida</a></li>
+          <li><a href="/uemg/">semestre</a></li>
+          <li><a href="/uemg/direitos-humanos/">direitos humanos</a></li>
+          <li><a href="/uemg/direitos-humanos/aulas/1/" aria-current="page">aula 1</a></li>
+          <li><a href="/uemg/reference/vida-dignidade/">referência rápida</a></li>
         </ul>
         <a href="#fontes">fontes</a>
       </nav>
@@ -198,7 +200,7 @@ export const uemgLifeDignityReferenceHtml = `
 
       <nav class="course-nav" aria-label="navegação da referência">
         <ul>
-          <li><a href="/uemg/">voltar à aula 1</a></li>
+          <li><a href="/uemg/direitos-humanos/aulas/1/">voltar à aula 1</a></li>
           <li><a href="#glossario">glossário</a></li>
         </ul>
         <a href="#fontes">fontes</a>
@@ -278,7 +280,7 @@ export const uemgLifeDignityReferenceHtml = `
 
       <footer class="course-foot">
         <p>referência 0001 · vida, dignidade e proteção</p>
-        <p><a href="/uemg/">voltar à aula</a></p>
+        <p><a href="/uemg/direitos-humanos/aulas/1/">voltar à aula</a></p>
       </footer>
     </main>
 `;
