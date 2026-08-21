@@ -1,0 +1,32 @@
+exclude: |
+  (?x)^(?:
+    next-env\.d\.ts
+    | (?:.*/)?(?:vendor|generated|corpus|fixtures?|dist|out|build|coverage|\.next|node_modules)(?:/|$)
+    | .*\.generated\.[^/]+
+  )$
+
+repos:
+  - repo: https://github.com/oxc-project/mirrors-oxfmt
+    rev: v0.64.0
+    hooks:
+      - id: oxfmt
+        # Keep existing formatting debt out of this focused campaign PR.
+        exclude: |
+          (?x)^(?:
+            scripts/(?:check-links|content-contract\.test)\.mjs
+            | src/app/\(en\)/en/architecture/page\.tsx
+            | src/app/\(pt\)/(?:
+                arquitetura/page
+                | uemg/(?:direitos-humanos/(?:aulas/2/)?page|enade/(?:aulas/1/)?page|page)
+                | uemg/reference/vida-dignidade/page
+              )\.tsx
+            | src/components/(?:CaseIndexPage|FounderProfilePage|GalaxyHero)\.tsx
+            | src/content/uemg-semester\.ts
+            | src/i18n/ui\.ts
+          )$
+
+  - repo: https://github.com/oxc-project/mirrors-oxlint
+    rev: v1.79.0
+    hooks:
+      - id: oxlint
+        args: [--deny-warnings]

@@ -43,6 +43,22 @@ npm run build
 `scripts/check-links.mjs` verifica os recibos de fonte e os links de contato.
 Um endereço quebrado remove a evidência do registro e falha a verificação.
 
+### pre-commit
+
+Instale o [`pre-commit`](https://pre-commit.com/) e ative os hooks neste clone:
+
+```sh
+pre-commit install
+```
+
+Por padrão, os hooks recebem somente os arquivos staged. Para conferir manualmente todos os arquivos suportados:
+
+```sh
+pre-commit run --all-files
+```
+
+A configuração executa Oxfmt antes de Oxlint. Os tipos definidos pelos mirrors oficiais limitam ambos a JavaScript, JSX, TypeScript e TSX. A exclusão compartilhada também impede a passagem de vendor, código gerado, corpus, fixtures, binários e saídas de build. Oxfmt não reescreve o débito de formatação legado neste PR focado; Oxlint continua cobrindo esses arquivos. Na prova de instalação, um arquivo temporário staged com formatação incorreta deve ser corrigido por Oxfmt; depois, uma violação temporária detectável deve ser bloqueada por Oxlint. Remova o arquivo de prova e execute novamente os hooks até obter sucesso.
+
 ## atualizar conteúdo
 
 Leia primeiro o README e o `SECURITY.md` de
