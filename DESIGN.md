@@ -13,11 +13,11 @@ Next.js 15 App Router with static export, React 19, TypeScript, Anime.js 4 and p
 
 Persuade + Experience. The home establishes Myke as a Founder / CTO who works across product, engineering and operations. It should make the person, thesis and selected work legible before technical documentation.
 
-The evidence-backed professional claim is: “I take messy real-world problems through the whole loop: find the constraint, change the system, test the path, and make it run.” Product, design, research and technology are means inside that loop, not narrower substitutes for it.
+The professional thesis is the space between intent and useful reality: Myke helps real ideas and problems move through investigation, shared choices, maps, contracts, decomposition, construction, testing and human experience. The people living the problem and the context retain authority; agents extend execution without replacing human judgment. Public cases must prove parts of that traversal without inflating their evidence.
 
 ## direction
 
-A dark editorial archive with a persistent narrow rail and one viewport of content at a time. The visual world combines restrained orbital geometry, a sans + serif italic + mono type system and real project identities. Lowercase is intentional.
+An evidence-first editorial portfolio with dark framing, a warm paper section for public work and restrained orbital geometry as a signature rather than a stack diagram. Sections may use distinct SVG artifacts tied to their job: orbital path for the whole-loop thesis, a process line for the method, a ruled field for reflection and an envelope path for contact. The visual world combines a sans + serif italic + mono type system and direct, source-backed project narratives. Lowercase is intentional.
 
 The home is not an infrastructure dashboard. Technical architecture remains available on a separate documentary route.
 
@@ -25,31 +25,24 @@ The home is not an infrastructure dashboard. Technical architecture remains avai
 
 Desktop home:
 
-1. Persistent rail: identity, cases, personal about, articles and contact.
-2. Cases slide, selected by default:
-   - positioning statement;
-   - orbital stack graph connecting related frameworks, data, delivery and operations technologies;
-   - no project cards or case controls on the home slide.
-3. About slide:
-   - one personal statement grounded in current study, research and product work;
-   - three ruled notes — curiosity, continuity and encounter — as extensions of that narrative, never service cards;
-   - no contact links.
-4. Contact slide:
-   - direct conversation is separated from public work;
-   - email is the primary action and each full row explains the destination before activation.
-5. Cases slide: the editorial index renders inside the persistent rail shell and owns its own vertical scroll.
-6. Deep-link case indexes:
+1. Sticky top header: identity, direct section anchors and language.
+2. Hero: positioning statement, two direct actions and restrained orbital traces.
+3. Evidence ledger: three public cases with explicit state and a direct path to each full entry.
+4. Method: the three repeated responsibilities behind the work.
+5. About: one personal statement and three ruled notes.
+6. Contact: email first, followed by public profiles.
+7. Deep-link case indexes:
    - `/case/`;
    - `/en/case/`.
 7. Legacy architecture routes redirect to the matching case index.
 
-At 1268 × 768, every desktop slide fits exactly one viewport and the cases tabs touch the bottom edge. The document must not scroll horizontally.
+At 1268 × 768, the hero fills the first viewport and exposes an explicit path to evidence. The document must not scroll horizontally.
 
 ## content hierarchy
 
 The home only uses facts that support positioning, work or proof. Biographical details, metrics and arguments that need context belong in cases or future articles, not as isolated fragments.
 
-“Construir é só metade” remains the editorial headline, while its supporting sentence must name the full method: restriction discovery, system change, path testing and operation. Cases must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
+The home leads with “da intenção ao que funciona” and names translation as the work rather than claiming unilateral authority over what should exist. Three public cases prove parts of that sequence with direct sources and explicit limits; code and local receipts do not prove customer outcomes, adoption, revenue, uptime or current production state.
 
 Case copy states the product context and responsibility. It does not claim revenue, scale, uptime, adoption or institutional endorsement.
 
@@ -121,7 +114,7 @@ Mobile is not a scaled desktop composition.
 
 ## case articles
 
-`/case/` is the editorial index for articles organized as situation → constraint → system change → path test → operation → evidence limits. Architecture is supporting evidence for a decision under constraints, not the article's central claim. The legacy `/arquitetura/` route redirects there; the superseded callgraph implementation is not retained.
+`/case/` is the editorial index. Each case opens a rendered six-chapter journey: idea → why → crossing → system → observed evidence → boundary. The visitor advances through the story like slides, while the route remains linkable and keyboard-operable. Architecture is visualized in the system chapter as a bounded conceptual flow, not presented as live topology. The only surface labelled primary source is the pinned GitHub repository. A live product link, when available, is labelled as a public artifact rather than a source. The legacy `/arquitetura/` route redirects to the index.
 
 The index exposes that reading method once, then lets each case lead with identity, an editorial thesis and factual context. Architecture sits below the narrative as secondary metadata. Rows do not pretend to be links until a real article destination exists.
 

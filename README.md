@@ -2,10 +2,10 @@
 
 portfólio estático e bilíngue construído em Next.js, React e Anime.js.
 
-A página pública usa `infra-examples` como fonte factual. O conteúdo desse
-repositório é um recorte público, sanitizado e organizado por ferramenta,
-derivado de infraestrutura real. Cada registro em `src/data/infra.json`
-aponta para o README da ferramenta no commit usado pela página.
+A página pública usa fontes primárias fixadas para cada claim. Os cases de
+`src/data/cases.ts` apontam para código, superfícies públicas e documentos de
+limite do EDUCA, Inclusão Digital UEMG e `infra-examples`. Os registros técnicos
+de `src/data/infra.json` continuam ancorados no commit público indicado.
 
 ## estrutura
 
@@ -14,6 +14,8 @@ aponta para o README da ferramenta no commit usado pela página.
 | página em português | `src/app/page.tsx` |
 | página em inglês | `src/app/en/page.tsx` |
 | fatos e recibos de ferramenta | `src/data/infra.json` |
+| cases, estados e recibos públicos | `src/data/cases.ts` |
+| jornada interativa de cada case | `src/components/CaseJourneyPage.tsx` |
 | textos bilíngues da interface | `src/i18n/ui.ts` |
 | composição da página | `src/components/FounderProfilePage.tsx` |
 | galáxia de stacks | `src/components/GalaxyHero.tsx` |

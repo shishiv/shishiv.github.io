@@ -32,10 +32,14 @@ async function collect() {
   const infra = JSON.parse(await readFile(join(root, "src/data/infra.json"), "utf8"));
   for (const example of infra) add(example.source.href, `infra.json · ${example.id}`);
 
+  const cases = await readFile(join(root, "src/data/cases.ts"), "utf8");
+  for (const url of urlsIn(cases)) add(url, "src/data/cases.ts");
+
   const publicFiles = [
     "src/i18n/ui.ts",
     "src/components/FounderProfilePage.tsx",
     "src/components/CaseIndexPage.tsx",
+    "src/components/CaseJourneyPage.tsx",
     "src/components/GalaxyHero.tsx",
     "src/content/uemg-lessons.ts",
     "src/app/(pt)/uemg/direitos-humanos/aulas/2/page.tsx",

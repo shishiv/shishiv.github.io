@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(fileURLToPath(new URL("..", import.meta.url)));
 const infra = JSON.parse(await readFile(join(root, "src/data/infra.json"), "utf8"));
+const cases = await readFile(join(root, "src/data/cases.ts"), "utf8");
 const sourceCommit = "c0469a25a6602399ba2107cee5d42d48d12e4c31";
 const errors = [];
 
@@ -44,9 +45,17 @@ if (/full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i.test(publi
   errors.push("unsupported full-stack positioning found in public profile content");
 }
 
+if ([...cases.matchAll(/featured: true/g)].length !== 3) {
+  errors.push("home must expose exactly three featured public cases");
+}
+
+for (const field of ["role", "problem", "decision", "built", "observed", "limit", "evidence"]) {
+  if (!new RegExp(`\\b${field}:`).test(cases)) errors.push(`featured cases are missing ${field}`);
+}
+
 if (errors.length > 0) {
   console.error(errors.map((error) => `content lint: ${error}`).join("\n"));
   process.exit(1);
 }
 
-console.log(`content lint: ${infra.length} records, bilingual receipts present`);
+console.log(`content lint: ${infra.length} infrastructure records and 3 featured cases, bilingual receipts present`);

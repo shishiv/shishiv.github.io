@@ -12,6 +12,7 @@ interface GalaxyHeroProps {
   focusNote: string;
   selectedLabel: string;
   relatedLabel: string;
+  evidenceLabel: string;
 }
 
 const stackNodes = [
@@ -63,6 +64,7 @@ export function GalaxyHero({
   focusNote,
   selectedLabel,
   relatedLabel,
+  evidenceLabel,
 }: GalaxyHeroProps) {
   const rootRef = useRef<HTMLElement>(null);
   const hasDrawnRef = useRef(false);
@@ -166,6 +168,9 @@ export function GalaxyHero({
           <span>{titleSecond}</span>
         </h1>
         <p>{lead}</p>
+        <a className="founder-hero-evidence" href="#featured-evidence">
+          {evidenceLabel} <span aria-hidden="true">↓</span>
+        </a>
       </div>
 
       <div

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import "@/styles/portfolio.css";
+import "@/styles/case-journey.css";
+import "@/styles/case-directory.css";
 import { ui } from "@/i18n/ui";
 
 export const metadata: Metadata = {
