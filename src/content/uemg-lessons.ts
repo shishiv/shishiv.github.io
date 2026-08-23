@@ -185,8 +185,7 @@ export const uemgLessonOneHtml = `
       </div>
 
       <footer class="course-foot">
-        <p>aula 1 · revisão pública · atualizada em 10/08/2026</p>
-        <p>algo ficou obscuro? me pergunte e eu volto à fonte antes de ampliar a nota.</p>
+        <p>aula 1 · 10/08/2026</p>
       </footer>
     </main>
 `;
@@ -280,7 +279,6 @@ export const uemgLifeDignityReferenceHtml = `
 
       <footer class="course-foot">
         <p>referência 0001 · vida, dignidade e proteção</p>
-        <p><a href="/uemg/direitos-humanos/aulas/1/">voltar à aula</a></p>
       </footer>
     </main>
 `;
