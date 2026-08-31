@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CaseIndexPage } from "@/components/CaseIndexPage";
+import { FounderProfilePage } from "@/components/FounderProfilePage";
 import { ui } from "@/i18n/ui";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Cases() {
-  return <CaseIndexPage locale="pt" />;
+  return <FounderProfilePage locale="pt" initialSection="articles" />;
 }

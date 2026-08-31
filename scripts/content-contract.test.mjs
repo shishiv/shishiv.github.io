@@ -58,3 +58,53 @@ test("the orbital readout provides a bilingual route into the internal cases", a
   assert.ok(actions.every(Boolean));
   assert.notEqual(actions[0], actions[1]);
 });
+
+test("Portuguese and English case routes reuse the orbital shell with the cases rail active", async () => {
+  const [ptHome, enHome, ptCases, enCases, founder] = await Promise.all([
+    readFile(join(root, "src/app/(pt)/page.tsx"), "utf8"),
+    readFile(join(root, "src/app/(en)/en/page.tsx"), "utf8"),
+    readFile(join(root, "src/app/(pt)/case/page.tsx"), "utf8"),
+    readFile(join(root, "src/app/(en)/en/case/page.tsx"), "utf8"),
+    readFile(join(root, "src/components/FounderProfilePage.tsx"), "utf8"),
+  ]);
+
+  assert.match(ptHome, /<FounderProfilePage locale="pt" \/>/);
+  assert.match(enHome, /<FounderProfilePage locale="en" \/>/);
+  assert.match(ptCases, /<FounderProfilePage locale="pt" initialSection="articles" \/>/);
+  assert.match(enCases, /<FounderProfilePage locale="en" initialSection="articles" \/>/);
+  assert.doesNotMatch(ptCases, /CaseIndexPage/);
+  assert.doesNotMatch(enCases, /CaseIndexPage/);
+  assert.doesNotMatch(founder, /function CaseIndexPage/);
+  assert.match(founder, /initialSection\?:/);
+  assert.doesNotMatch(founder, /\{t\.uemgNav\}|href="\/uemg\/"/);
+  for (const section of ["cases", "trajectory", "articles", "contact"]) {
+    assert.match(founder, new RegExp(`"${section}"`));
+  }
+  assert.match(founder, /useState<[^>]+>\(initialSection \?\? "cases"\)/);
+});
+
+test("the portfolio rail removes the UEMG notebook link without removing UEMG routes", async () => {
+  const [founder, ui, uemgIndex, uemgLesson] = await Promise.all([
+    readFile(join(root, "src/components/FounderProfilePage.tsx"), "utf8"),
+    readFile(join(root, "src/i18n/ui.ts"), "utf8"),
+    readFile(join(root, "src/app/(pt)/uemg/page.tsx"), "utf8"),
+    readFile(join(root, "src/app/(pt)/uemg/direitos-humanos/aulas/1/page.tsx"), "utf8"),
+  ]);
+
+  assert.doesNotMatch(founder, /\{t\.uemgNav\}|href="\/uemg\/"/);
+  assert.doesNotMatch(ui, /uemgNav\s*:/);
+  assert.doesNotMatch(ui, /backHome\s*:/);
+  assert.match(uemgIndex, /export default function UemgSemesterIndexPage/);
+  assert.match(uemgLesson, /className="course-page"/);
+});
+
+test("the portfolio root layouts provide a local favicon without a console 404", async () => {
+  const [ptLayout, enLayout] = await Promise.all([
+    readFile(join(root, "src/app/(pt)/layout.tsx"), "utf8"),
+    readFile(join(root, "src/app/(en)/layout.tsx"), "utf8"),
+  ]);
+
+  for (const layout of [ptLayout, enLayout]) {
+    assert.match(layout, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" \/>/);
+  }
+});

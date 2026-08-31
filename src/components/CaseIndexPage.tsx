@@ -43,21 +43,6 @@ function CaseIndexContent({ locale }: { locale: Locale }) {
   );
 }
 
-export function CaseIndexPage({ locale }: { locale: Locale }) {
-  const t = useUi(locale);
-  const homeHref = locale === "pt" ? "/" : "/en/";
-
-  return (
-    <main className="case-index" lang={t.lang}>
-      <header className="case-index-header">
-        <a href={homeHref}>{t.backHome} ←</a>
-        <span>{t.heroName}</span>
-      </header>
-      <CaseIndexContent locale={locale} />
-    </main>
-  );
-}
-
 export function CaseIndexSlide({ locale }: { locale: Locale }) {
   const t = useUi(locale);
   return (
