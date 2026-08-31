@@ -108,3 +108,12 @@ test("the portfolio root layouts provide a local favicon without a console 404",
     assert.match(layout, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" \/>/);
   }
 });
+
+test("the mobile portfolio rail removes the final nav border", async () => {
+  const styles = await readFile(join(root, "src/styles/globals.css"), "utf8");
+
+  const mobileStyles = styles.slice(styles.indexOf("@media (max-width: 800px)"));
+
+  assert.notEqual(styles.indexOf("@media (max-width: 800px)"), -1);
+  assert.ok(mobileStyles.includes(".founder-rail nav :is(a,button):last-child { border-bottom: 0; }"));
+});
