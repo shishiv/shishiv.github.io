@@ -42,3 +42,19 @@ test("the public profile uses the approved founder and product positioning", asy
   assert.match(text, /product engineer/i);
   assert.doesNotMatch(text, /full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i);
 });
+
+test("the orbital readout provides a bilingual route into the internal cases", async () => {
+  const [founder, hero, ui] = await Promise.all([
+    readFile(join(root, "src/components/FounderProfilePage.tsx"), "utf8"),
+    readFile(join(root, "src/components/GalaxyHero.tsx"), "utf8"),
+    readFile(join(root, "src/i18n/ui.ts"), "utf8"),
+  ]);
+  const actions = [...ui.matchAll(/stackCasesAction:\s*"([^"]+)"/g)].map(([, copy]) => copy);
+
+  assert.match(founder, /<GalaxyHero[\s\S]*onOpenCases=\{\(\) => showSection\("articles"\)\}/);
+  assert.match(hero, /onOpenCases/);
+  assert.match(hero, /aria-label=\{casesActionLabel\}/);
+  assert.equal(actions.length, 2);
+  assert.ok(actions.every(Boolean));
+  assert.notEqual(actions[0], actions[1]);
+});

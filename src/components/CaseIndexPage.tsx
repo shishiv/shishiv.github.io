@@ -61,7 +61,7 @@ export function CaseIndexPage({ locale }: { locale: Locale }) {
 export function CaseIndexSlide({ locale }: { locale: Locale }) {
   const t = useUi(locale);
   return (
-    <section className="case-index case-index-embedded" lang={t.lang} aria-label={t.articlesNav}>
+    <section id="case-index-slide" className="case-index case-index-embedded" lang={t.lang} aria-label={t.articlesNav}>
       <CaseIndexContent locale={locale} />
     </section>
   );

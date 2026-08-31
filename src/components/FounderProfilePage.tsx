@@ -14,8 +14,12 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
   const [sectionDirection, setSectionDirection] = useState<"forward" | "backward">("forward");
   const sectionOrder = { cases: 0, trajectory: 1, articles: 2, contact: 3 } as const;
   const showSection = (section: keyof typeof sectionOrder) => {
+    if (section === activeSection) return;
     setSectionDirection(sectionOrder[section] >= sectionOrder[activeSection] ? "forward" : "backward");
     setActiveSection(section);
+    window.requestAnimationFrame(() => {
+      slideRef.current?.focus({ preventScroll: true });
+    });
   };
 
   useEffect(() => {
@@ -83,18 +87,20 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
         </aside>
 
         <main className="founder-main" id="founder-content" tabIndex={-1}>
-          <div className={`founder-slide founder-slide-${activeSection}`} ref={slideRef}>
+          <div className={`founder-slide founder-slide-${activeSection}`} ref={slideRef} tabIndex={-1}>
           {activeSection === "cases" ? <>
             <GalaxyHero
-            titleFirst={t.founderHeroTitleFirst}
-            titleSecond={t.founderHeroTitleSecond}
-            lead={t.founderHeroLead}
-            brandsLabel={t.brandsLabel}
-            focusLabel={t.stackFocusLabel}
-            focusNote={t.stackFocusNote}
-            selectedLabel={t.stackSelectedLabel}
-            relatedLabel={t.stackRelatedLabel}
-          />
+              titleFirst={t.founderHeroTitleFirst}
+              titleSecond={t.founderHeroTitleSecond}
+              lead={t.founderHeroLead}
+              brandsLabel={t.brandsLabel}
+              focusLabel={t.stackFocusLabel}
+              focusNote={t.stackFocusNote}
+              selectedLabel={t.stackSelectedLabel}
+              relatedLabel={t.stackRelatedLabel}
+              casesActionLabel={t.stackCasesAction}
+              onOpenCases={() => showSection("articles")}
+            />
           </> : null}
 
           {activeSection === "trajectory" ? <section className="founder-about" id="trajectory" aria-labelledby="trajectory-title">

@@ -31,6 +31,7 @@ export const ui = {
     stackFocusNote: "ferramentas mudam. o ciclo permanece.",
     stackSelectedLabel: "selecionada",
     stackRelatedLabel: "tecnologia relacionada",
+    stackCasesAction: "ler os cases →",
     workTitle: "trabalhos e evidências",
     caseArchitectureLabel: "arquitetura do case",
     workItems: [
@@ -184,6 +185,7 @@ export const ui = {
     stackFocusNote: "tools change. the loop remains.",
     stackSelectedLabel: "selected",
     stackRelatedLabel: "related technology",
+    stackCasesAction: "read the cases →",
     workTitle: "work and evidence",
     caseArchitectureLabel: "case architecture",
     workItems: [
