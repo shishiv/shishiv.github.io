@@ -5,17 +5,27 @@ import { CaseIndexSlide } from "./CaseIndexPage";
 import { GalaxyHero } from "./GalaxyHero";
 import { useUi, type Locale } from "@/i18n/ui";
 
-export function FounderProfilePage({ locale }: { locale: Locale }) {
+export function FounderProfilePage({
+  locale,
+  initialSection,
+}: {
+  locale: Locale;
+  initialSection?: "trajectory" | "cases" | "articles" | "contact";
+}) {
   const t = useUi(locale);
   const slideRef = useRef<HTMLDivElement>(null);
   const slideAnimationRef = useRef<Animation | null>(null);
   const firstSectionRef = useRef(true);
-  const [activeSection, setActiveSection] = useState<"trajectory" | "cases" | "articles" | "contact">("cases");
+  const [activeSection, setActiveSection] = useState<"trajectory" | "cases" | "articles" | "contact">(initialSection ?? "cases");
   const [sectionDirection, setSectionDirection] = useState<"forward" | "backward">("forward");
   const sectionOrder = { cases: 0, trajectory: 1, articles: 2, contact: 3 } as const;
   const showSection = (section: keyof typeof sectionOrder) => {
+    if (section === activeSection) return;
     setSectionDirection(sectionOrder[section] >= sectionOrder[activeSection] ? "forward" : "backward");
     setActiveSection(section);
+    window.requestAnimationFrame(() => {
+      slideRef.current?.focus({ preventScroll: true });
+    });
   };
 
   useEffect(() => {
@@ -68,7 +78,6 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
             <button type="button" aria-current={activeSection === "cases" ? "page" : undefined} onClick={() => showSection("cases")}>{t.workNav}</button>
             <button type="button" aria-current={activeSection === "trajectory" ? "page" : undefined} onClick={() => showSection("trajectory")}>{t.trajectoryNav}</button>
             <button type="button" aria-current={activeSection === "articles" ? "page" : undefined} onClick={() => showSection("articles")}>{t.articlesNav}</button>
-            <a href="/uemg/">{t.uemgNav}</a>
             <button type="button" aria-current={activeSection === "contact" ? "page" : undefined} onClick={() => showSection("contact")}>{t.contactNav}</button>
           </nav>
 
@@ -83,18 +92,20 @@ export function FounderProfilePage({ locale }: { locale: Locale }) {
         </aside>
 
         <main className="founder-main" id="founder-content" tabIndex={-1}>
-          <div className={`founder-slide founder-slide-${activeSection}`} ref={slideRef}>
+          <div className={`founder-slide founder-slide-${activeSection}`} ref={slideRef} tabIndex={-1}>
           {activeSection === "cases" ? <>
             <GalaxyHero
-            titleFirst={t.founderHeroTitleFirst}
-            titleSecond={t.founderHeroTitleSecond}
-            lead={t.founderHeroLead}
-            brandsLabel={t.brandsLabel}
-            focusLabel={t.stackFocusLabel}
-            focusNote={t.stackFocusNote}
-            selectedLabel={t.stackSelectedLabel}
-            relatedLabel={t.stackRelatedLabel}
-          />
+              titleFirst={t.founderHeroTitleFirst}
+              titleSecond={t.founderHeroTitleSecond}
+              lead={t.founderHeroLead}
+              brandsLabel={t.brandsLabel}
+              focusLabel={t.stackFocusLabel}
+              focusNote={t.stackFocusNote}
+              selectedLabel={t.stackSelectedLabel}
+              relatedLabel={t.stackRelatedLabel}
+              casesActionLabel={t.stackCasesAction}
+              onOpenCases={() => showSection("articles")}
+            />
           </> : null}
 
           {activeSection === "trajectory" ? <section className="founder-about" id="trajectory" aria-labelledby="trajectory-title">

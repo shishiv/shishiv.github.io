@@ -17,20 +17,19 @@ export const ui = {
     workNav: "home",
 
     articlesNav: "cases",
-    uemgNav: "caderno UEMG",
     caseIndexTitleFirst: "cases,",
     caseIndexTitleSecond: "restrições e sistemas.",
     caseIndexIntro:
       "cada artigo parte de um problema real e segue o mesmo ciclo: restrição, mudança no sistema, teste em uso, operação e limites da evidência. a arquitetura aparece como consequência dessas decisões.",
     caseMethodLabel: "cada case será lido por",
     caseMethod: ["problema real", "restrição", "mudança", "teste", "operação", "limites"],
-    backHome: "voltar para a home",
 
     brandsLabel: "tecnologias relacionadas na stack de produto e operação",
     stackFocusLabel: "stack em foco",
     stackFocusNote: "ferramentas mudam. o ciclo permanece.",
     stackSelectedLabel: "selecionada",
     stackRelatedLabel: "tecnologia relacionada",
+    stackCasesAction: "ler os cases →",
     workTitle: "trabalhos e evidências",
     caseArchitectureLabel: "arquitetura do case",
     workItems: [
@@ -170,20 +169,19 @@ export const ui = {
     workNav: "home",
 
     articlesNav: "cases",
-    uemgNav: "UEMG notebook",
     caseIndexTitleFirst: "cases,",
     caseIndexTitleSecond: "constraints and systems.",
     caseIndexIntro:
       "each article starts with a real problem and follows the same loop: constraint, system change, testing in use, operation and evidence limits. architecture appears as a consequence of those decisions.",
     caseMethodLabel: "each case will be read through",
     caseMethod: ["real problem", "constraint", "change", "test", "operation", "limits"],
-    backHome: "back to home",
 
     brandsLabel: "related technologies across the product and operations stack",
     stackFocusLabel: "stack in focus",
     stackFocusNote: "tools change. the loop remains.",
     stackSelectedLabel: "selected",
     stackRelatedLabel: "related technology",
+    stackCasesAction: "read the cases →",
     workTitle: "work and evidence",
     caseArchitectureLabel: "case architecture",
     workItems: [

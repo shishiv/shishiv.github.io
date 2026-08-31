@@ -12,6 +12,8 @@ interface GalaxyHeroProps {
   focusNote: string;
   selectedLabel: string;
   relatedLabel: string;
+  casesActionLabel: string;
+  onOpenCases: () => void;
 }
 
 const stackNodes = [
@@ -63,6 +65,8 @@ export function GalaxyHero({
   focusNote,
   selectedLabel,
   relatedLabel,
+  casesActionLabel,
+  onOpenCases,
 }: GalaxyHeroProps) {
   const rootRef = useRef<HTMLElement>(null);
   const hasDrawnRef = useRef(false);
@@ -234,10 +238,13 @@ export function GalaxyHero({
             })}
           </g>
         </svg>
-        <div className="stack-focus-readout" aria-hidden="true">
+        <div className="stack-focus-readout">
           <span>{focusLabel}</span>
           <strong>{activeNode.label}</strong>
           <small>{focusNote}</small>
+          <button className="stack-focus-action" type="button" aria-label={casesActionLabel} aria-controls="case-index-slide" onClick={onOpenCases}>
+            {casesActionLabel}
+          </button>
         </div>
       </div>
     </section>
