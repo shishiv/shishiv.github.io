@@ -1,0 +1,110 @@
+1:"$Sreact.fragment"
+2:I[9766,[],""]
+3:I[8924,[],""]
+8:I[7150,[],""]
+:HL["/_next/static/css/0c59c3d6e4052d85.css","style"]
+:HL["/_next/static/css/c319b6d8625fcc5c.css","style"]
+4:T1170,
+<main class="course-sheet">
+      <header class="course-head">
+        <h1>vida, dignidade e proteção</h1>
+        <p class="course-meta">referência rápida<br />aula 1 · UEMG Frutal</p>
+      </header>
+
+      <nav class="course-nav" aria-label="navegação da referência">
+        <ul>
+          <li><a href="/uemg/direitos-humanos/aulas/1/">voltar à aula 1</a></li>
+          <li><a href="#glossario">glossário</a></li>
+        </ul>
+        <a href="#fontes">fontes</a>
+      </nav>
+
+      <div class="lesson-grid">
+        <article class="lesson" aria-labelledby="reference-title">
+          <h2 id="reference-title">o mapa em uma página</h2>
+          <p class="lesson-lead">
+            use esta folha para recuperar termos. volte à aula para a explicação e para o exercício de memória.
+          </p>
+
+          <h3 id="glossario">glossário mínimo</h3>
+          <dl aria-label="glossário da aula 1">
+            <div class="source-state">
+              <dt>reverência pela vida</dt>
+              <dd>ética de Schweitzer que amplia a consideração moral a todo ser vivo e rejeita hierarquias objetivas entre vidas.</dd>
+            </div>
+            <div class="source-state">
+              <dt>vida nua</dt>
+              <dd>em Agamben, vida politicamente produzida como exposição ao poder soberano. não é simples sinônimo de vida biológica.</dd>
+            </div>
+            <div class="source-state">
+              <dt>homo sacer</dt>
+              <dd>figura do direito romano usada por Agamben para pensar quem pode ser morto, mas não sacrificado.</dd>
+            </div>
+            <div class="source-state">
+              <dt>dignidade</dt>
+              <dd>valor reconhecido como inerente e igual a todos os membros da família humana no preâmbulo da Declaração Universal.</dd>
+            </div>
+            <div class="source-state">
+              <dt>poder soberano</dt>
+              <dd>poder que decide sobre a aplicação da regra e sobre a exceção. em Agamben, essa decisão alcança a própria vida.</dd>
+            </div>
+          </dl>
+
+          <h3>algoritmo de leitura</h3>
+          <ol>
+            <li>identifique qual vida está em questão.</li>
+            <li>pergunte quem reconhece essa vida como digna.</li>
+            <li>localize a regra que deveria protegê-la.</li>
+            <li>observe quem decide aplicar ou suspender essa proteção.</li>
+            <li>compare a proteção escrita com a proteção concreta.</li>
+          </ol>
+
+          <h3>não confundir</h3>
+          <ul>
+            <li><strong>vida nua</strong> não significa pobreza, nudez física ou mera vulnerabilidade.</li>
+            <li><strong>reverência pela vida</strong> não resolve sozinha conflitos práticos entre vidas.</li>
+            <li><strong>dignidade universal</strong> é uma norma; sua realização depende de instituições e práticas.</li>
+          </ul>
+
+          <h3 id="fontes">fontes-base</h3>
+          <ul>
+            <li><a href="https://www.schweitzer.org/en/discover/the-philosophy-of-reverence-for-life/" rel="noopener">Maison Albert Schweitzer</a></li>
+            <li><a href="https://www.degruyter.com/document/doi/10.1515/9780804764025/html" rel="noopener">De Gruyter, <em>Homo Sacer</em></a></li>
+            <li><a href="https://iep.utm.edu/agamben/" rel="noopener">Internet Encyclopedia of Philosophy, Agamben</a></li>
+            <li><a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights" rel="noopener">Declaração Universal dos Direitos Humanos</a></li>
+          </ul>
+        </article>
+
+        <aside class="lesson-rail" aria-label="uso da folha">
+          <section class="rail-block">
+            <h2>pergunta-mestra</h2>
+            <p>quando uma vida deixa de contar para quem tem poder de protegê-la?</p>
+          </section>
+          <section class="rail-block">
+            <h2>em dez segundos</h2>
+            <p>Schweitzer prescreve consideração. Agamben diagnostica abandono. a Declaração afirma dignidade igual.</p>
+          </section>
+          <section class="rail-block">
+            <h2>revisão espaçada</h2>
+            <p>tente reconstruir o algoritmo amanhã sem olhar. depois, aplique-o a um caso discutido em sala.</p>
+          </section>
+        </aside>
+      </div>
+
+      <footer class="course-foot">
+        <p>referência 0001 · vida, dignidade e proteção</p>
+      </footer>
+    </main>
+0:{"P":null,"b":"kI9AEp28M1gkZ4hjnJzb_","p":"","c":["","uemg","reference","vida-dignidade",""],"i":false,"f":[[["",{"children":["(pt)",{"children":["uemg",{"children":["reference",{"children":["vida-dignidade",{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",true]}],["",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["(pt)",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/0c59c3d6e4052d85.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"pt-BR","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;1,8..60,500&display=swap"}],["$","meta",null,{"name":"theme-color","content":"#07080b"}],["$","link",null,{"rel":"icon","href":"/favicon.svg","type":"image/svg+xml"}]]}],["$","body",null,{"children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":"$0:f:0:1:1:props:children:1:props:notFound:0:1:props:style","children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":"$0:f:0:1:1:props:children:1:props:notFound:0:1:props:children:props:children:1:props:style","children":404}],["$","div",null,{"style":"$0:f:0:1:1:props:children:1:props:notFound:0:1:props:children:props:children:2:props:style","children":["$","h2",null,{"style":"$0:f:0:1:1:props:children:1:props:notFound:0:1:props:children:props:children:2:props:children:props:style","children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]]}],{"children":["uemg",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["reference",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["vida-dignidade",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"course-page","dangerouslySetInnerHTML":{"__html":"$4"}}],["$L5"],"$L6"]}],{},null,false]},null,false]},null,false]},null,false]},null,false]},null,false],"$L7",false]],"m":"$undefined","G":["$8",[]],"s":false,"S":true}
+9:I[4431,[],"OutletBoundary"]
+b:I[5278,[],"AsyncMetadataOutlet"]
+d:I[4431,[],"ViewportBoundary"]
+f:I[4431,[],"MetadataBoundary"]
+10:"$Sreact.suspense"
+5:["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/c319b6d8625fcc5c.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+6:["$","$L9",null,{"children":["$La",["$","$Lb",null,{"promise":"$@c"}]]}]
+7:["$","$1","h",{"children":[null,[["$","$Ld",null,{"children":"$Le"}],null],["$","$Lf",null,{"children":["$","div",null,{"hidden":true,"children":["$","$10",null,{"fallback":null,"children":"$L11"}]}]}]]}]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+a:null
+c:{"metadata":[["$","title","0",{"children":"referência rápida - vida, dignidade e proteção"}],["$","meta","1",{"name":"description","content":"folha de referência da aula 1 de Direitos Humanos e Multiculturalismo."}]],"error":null,"digest":"$undefined"}
+11:"$c:metadata"
