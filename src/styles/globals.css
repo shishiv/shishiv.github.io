@@ -400,11 +400,13 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .founder-rail nav :is(a,button) { transition: color 160ms ease, padding-left 160ms ease; }
+  .founder-rail nav :is(a,button) { transition: color 160ms ease; }
+  .founder-rail nav [aria-current="page"] { padding-left: 0; }
   .founder-rail nav :is(a,button)::before { transition: opacity 160ms ease; transform: none; }
   .founder-rail nav [aria-current="page"]::before { transform: none; }
   .stack-edge { transition: opacity 160ms ease, stroke 160ms ease; }
   .stack-node { transition: opacity 160ms ease; }
   .stack-node-visual, .stack-node-aura { transition: none; }
   .stack-focus-action { transition: color 160ms ease, border-color 160ms ease; }
+  .stack-focus-action:active { transform: none; }
 }

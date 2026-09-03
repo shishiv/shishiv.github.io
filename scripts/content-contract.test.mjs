@@ -117,3 +117,13 @@ test("the mobile portfolio rail removes the final nav border", async () => {
   assert.notEqual(styles.indexOf("@media (max-width: 800px)"), -1);
   assert.ok(mobileStyles.includes(".founder-rail nav :is(a,button):last-child { border-bottom: 0; }"));
 });
+
+test("reduced motion removes spatial movement from new portfolio controls", async () => {
+  const styles = await readFile(join(root, "src/styles/globals.css"), "utf8");
+  const reducedMotionStyles = styles.slice(styles.indexOf("@media (prefers-reduced-motion: reduce)"));
+
+  assert.notEqual(styles.indexOf("@media (prefers-reduced-motion: reduce)"), -1);
+  assert.match(reducedMotionStyles, /\.founder-rail nav \[aria-current="page"\]\s*\{[^}]*padding-left:\s*0;/);
+  assert.match(reducedMotionStyles, /\.stack-focus-action:active\s*\{[^}]*transform:\s*none;/);
+  assert.doesNotMatch(reducedMotionStyles, /padding-left\s+160ms/);
+});
