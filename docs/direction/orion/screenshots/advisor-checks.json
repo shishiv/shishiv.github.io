@@ -1,0 +1,66 @@
+{
+  "scope": "Local Chromium prototype. Not a production acceptance or physical-device test.",
+  "checks": [
+    {
+      "width": 1440,
+      "height": 900,
+      "horizontalOverflow": false,
+      "verticalScroll": false,
+      "overlaps": [],
+      "image": "orion-atmosphere-desktop.png",
+      "fonts": [
+        "IBM Plex Mono",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Serif 4"
+      ],
+      "reducedMotion": true,
+      "animations": 0,
+      "allClicks": true,
+      "enter": true,
+      "space": true
+    },
+    {
+      "width": 1268,
+      "height": 768,
+      "horizontalOverflow": false,
+      "verticalScroll": false,
+      "overlaps": [],
+      "image": "orion-atmosphere-desktop.png",
+      "fonts": [
+        "IBM Plex Mono",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Serif 4"
+      ],
+      "reducedMotion": true,
+      "animations": 0,
+      "allClicks": true,
+      "enter": true,
+      "space": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false,
+      "verticalScroll": true,
+      "overlaps": [],
+      "image": "orion-atmosphere-mobile.png",
+      "fonts": [
+        "IBM Plex Mono",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Sans 3",
+        "Source Serif 4"
+      ],
+      "reducedMotion": true,
+      "animations": 0,
+      "allClicks": true,
+      "enter": true,
+      "space": true
+    }
+  ],
+  "keyboardNote": "Enter verified with a complete CDP keyDown text carriage-return and keyUp sequence; the initial key-only synthetic event omitted the text event."
+}

@@ -1,0 +1,17 @@
+{
+  "asset": "orion-atmosphere-mobile.png",
+  "generation": {
+    "tool": "image_generate",
+    "provider": "azure-gpt-image",
+    "model": "gpt-image-2-medium",
+    "aspect_ratio": "portrait",
+    "native_size": "1024x1536",
+    "quality": "medium",
+    "prompt": "Create a production-ready atmospheric background for the mobile Orion redesign of a dark editorial portfolio. Recompose the supplied reference into a quiet portrait field, not a crop of desktop. Output ONLY an image, no text, no letters, no logos, no watermark, no UI, no panels, no borders, no grids, no constellation lines, no nodes, no geometric symbols, no metrics, no people, no fake proof. Composition: near-black #07080b charcoal/blue-black base; the top and upper-middle 55% must remain very dark, low detail, and calm for header and reading copy; sparse natural stars, mostly tiny and dim; a soft vertical nebula drifting down the center-right/lower half, icy blue-gray and slate vapor with faint desaturated violet; one small localized restrained coral-orange #ff6842 ember glow in the lower-right third, not centered behind text. Organic gas and dust only, diffuse edges, no recognizable cosmic object, no circular galaxy, no dramatic explosion. Strong edge vignette, subdued highlights for cream typography and semantic SVG constellation layers. Editorial, cinematic, restrained, low saturation, high dark-range detail, generous negative space. Exact intended canvas: 1024x1536 portrait, safe for mobile cover cropping.",
+    "reference": "/root/portfolio-postmerge-audit/.impeccable/mocks/orion-round/orion-nebula-background.png"
+  },
+  "review": {
+    "prohibited_artifacts": "Passed visual inspection: no text, letters, logos, watermark, UI, people, recognizable object, constellation lines, nodes, or geometric symbols.",
+    "composition": "Upper half is the primary dark reading zone; nebula drifts through the lower center/right; restrained coral ember is lower-center/right; edge vignette is present."
+  }
+}

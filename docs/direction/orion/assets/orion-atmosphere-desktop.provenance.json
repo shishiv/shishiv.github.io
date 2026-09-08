@@ -1,0 +1,17 @@
+{
+  "asset": "orion-atmosphere-desktop.png",
+  "generation": {
+    "tool": "image_generate",
+    "provider": "azure-gpt-image",
+    "model": "gpt-image-2-medium",
+    "aspect_ratio": "landscape",
+    "native_size": "1536x1024",
+    "quality": "medium",
+    "prompt": "Create a production-ready atmospheric background for the Orion redesign of a dark editorial portfolio. Transform the supplied reference into a quieter, more flexible desktop landscape nebula field. Output ONLY an image, no text, no letters, no logos, no watermark, no UI, no panels, no borders, no grids, no constellation lines, no nodes, no geometric symbols, no metrics, no people, no fake proof. Composition: near-black #07080b charcoal/blue-black base; preserve a very generous low-detail, low-contrast reading zone across the left 42% and around the lower-left; subtle natural sparse stars, mostly tiny and dim; a soft vertically drifting nebula concentrated in the center-right and lower-right, with icy blue-gray and slate vapor, faint desaturated violet, and one localized restrained coral-orange #ff6842 ember glow in the lower center-right. Organic gas and dust only, diffuse edges, no recognizable cosmic object, no circular galaxy, no dramatic explosion. Keep all highlights subdued enough for cream typography and semantic SVG constellation layers to sit above it. Strong edge vignette, dark rightmost margin suitable for an opaque case panel, no fixed stars that imply UI alignment. Editorial, cinematic, restrained, atmospheric, low saturation, high dark-range detail, generous negative space. Exact intended canvas: 2400x1350 landscape, safe for cover cropping.",
+    "reference": "/root/portfolio-postmerge-audit/.impeccable/mocks/orion-round/orion-nebula-background.png"
+  },
+  "review": {
+    "prohibited_artifacts": "Passed visual inspection: no text, letters, logos, watermark, UI, people, recognizable object, constellation lines, nodes, or geometric symbols.",
+    "composition": "Left half is the primary dark reading zone; nebula concentrates center-right/lower-right; restrained coral ember is lower-center/right; edge vignette is present."
+  }
+}

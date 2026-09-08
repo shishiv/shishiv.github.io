@@ -1,0 +1,55 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "font": true,
+      "anchors": true,
+      "ctas": true,
+      "keyboard": true,
+      "faq": true,
+      "tagline": true,
+      "mobileMenu": false
+    },
+    {
+      "width": 1268,
+      "height": 768,
+      "overflow": false,
+      "font": true,
+      "anchors": true,
+      "ctas": true,
+      "keyboard": true,
+      "faq": true,
+      "tagline": true,
+      "mobileMenu": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "font": true,
+      "anchors": true,
+      "ctas": true,
+      "keyboard": true,
+      "faq": true,
+      "tagline": true,
+      "mobileMenu": true
+    },
+    {
+      "width": 320,
+      "height": 844,
+      "overflow": false,
+      "font": true,
+      "anchors": true,
+      "ctas": true,
+      "keyboard": true,
+      "faq": true,
+      "tagline": true,
+      "mobileMenu": true
+    }
+  ],
+  "reducedMotion": true,
+  "noJavaScript": true,
+  "errors": []
+}

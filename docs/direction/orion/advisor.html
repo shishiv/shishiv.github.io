@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Orion B · composição do advisor</title>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="advisor.css">
+  <script src="advisor.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">pular para o conteúdo</a>
+  <header class="rail">
+    <div class="identity"><strong>myke matos</strong><span>founder / cto<br class="desktop-only"> product engineer</span></div>
+    <nav aria-label="Prévia da navegação">
+      <a href="#main" aria-current="page">home</a>
+      <span aria-disabled="true">sobre</span>
+      <a href="#case-list">cases</a>
+      <span aria-disabled="true">contato</span>
+    </nav>
+    <div class="rail-foot">frutal, mg<br><br>pt / en
+      <a class="review-note" href="README.md">estudo não aprovado</a>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <picture class="atmosphere" aria-hidden="true">
+      <source media="(max-width:800px)" srcset="assets/orion-atmosphere-mobile.png">
+      <img src="assets/orion-atmosphere-desktop.png" alt="">
+    </picture>
+    <section class="hero" aria-labelledby="headline">
+      <h1 id="headline">construir é <em>só metade.</em></h1>
+      <p>eu assumo problemas reais e confusos pelo ciclo inteiro: encontro a restrição, mudo o sistema, testo o caminho e coloco para funcionar.</p>
+    </section>
+    <div class="legend" aria-hidden="true"><i class="star-key"></i> cases <i class="method-key"></i> método</div>
+    <section class="map" aria-label="Cases conectados pelo método">
+      <svg class="desktop-figure" viewBox="0 0 628 676" aria-hidden="true">
+        <path class="figure-line" d="M130 92 L516 128 M128 566 L474 590 M130 92 L232 356 L128 566 M516 128 L392 310 L474 590"/>
+        <path class="method-line" d="M232 356 L312 333 L392 310 L432 452"/>
+        <g class="case-point selected" data-point="triangulotec"><circle class="ring" cx="130" cy="92" r="23"/><circle cx="130" cy="92" r="9"/></g>
+        <g class="case-point" data-point="scapola"><circle class="ring" cx="516" cy="128" r="23"/><circle cx="516" cy="128" r="8"/></g>
+        <g class="case-point" data-point="gastei"><circle class="ring" cx="128" cy="566" r="23"/><circle cx="128" cy="566" r="8"/></g>
+        <g class="case-point" data-point="uemg"><circle class="ring" cx="474" cy="590" r="23"/><circle cx="474" cy="590" r="8"/></g>
+        <path class="diamonds" d="M232 350 l6 6 -6 6 -6 -6 Z M312 327 l6 6 -6 6 -6 -6 Z M392 304 l6 6 -6 6 -6 -6 Z M432 446 l6 6 -6 6 -6 -6 Z"/>
+      </svg>
+      <svg class="mobile-figure" viewBox="0 0 390 200" aria-hidden="true">
+        <path class="figure-line" d="M74 28 L318 44 M88 176 L292 186 M74 28 L150 110 L88 176 M318 44 L230 86 L292 186"/>
+        <path class="method-line" d="M150 110 L190 98 L230 86 L250 142"/>
+        <g class="case-point"><circle cx="74" cy="28" r="5"/><circle cx="318" cy="44" r="5"/><circle cx="88" cy="176" r="5"/><circle cx="292" cy="186" r="5"/></g>
+        <path class="diamonds" d="M150 106 l4 4 -4 4 -4 -4 Z M190 94 l4 4 -4 4 -4 -4 Z M230 82 l4 4 -4 4 -4 -4 Z M250 138 l4 4 -4 4 -4 -4 Z"/>
+      </svg>
+      <div class="method">
+        <p class="mobile-only">método</p>
+        <ol aria-label="Método de trabalho">
+          <li>restrição</li><li>sistema</li><li>teste</li><li>operação</li>
+        </ol>
+      </div>
+      <div class="case-list" id="case-list" role="group" aria-label="Selecionar case">
+        <button class="case-node selected" data-case="triangulotec" aria-pressed="true" type="button">
+          <strong>triangulotec</strong><span class="case-description">produto do contexto à operação.</span>
+          <span class="case-meta">contexto · produto · operação</span>
+        </button>
+        <button class="case-node" data-case="scapola" aria-pressed="false" type="button">
+          <strong>scapola comunica</strong><span class="case-description">presença digital com continuidade.</span>
+          <span class="case-meta">contexto · produto web · operação</span>
+        </button>
+        <button class="case-node" data-case="gastei" aria-pressed="false" type="button">
+          <strong>gastei</strong><span class="case-description">construção e distribuição no mesmo produto.</span>
+          <span class="case-meta">web · api · dados + filas</span>
+        </button>
+        <button class="case-node" data-case="uemg" aria-pressed="false" type="button">
+          <strong>inclusão digital UEMG</strong><span class="case-description">tecnologia que acompanha o ensino.</span>
+          <span class="case-meta">ensino · tecnologia</span>
+        </button>
+      </div>
+    </section>
+    <aside class="focus-panel" id="case-focus" aria-label="Case em foco">
+      <span class="focus-label">case em foco</span>
+      <div aria-live="polite" aria-atomic="true">
+        <h2>triangulotec</h2><p class="focus-description">produto do contexto à operação.</p>
+        <p class="focus-meta">contexto · produto · operação</p>
+      </div>
+      <a class="case-link" href="https://shishiv.github.io/case/">abrir índice de cases <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+    </aside>
+  </main>
+  <footer class="continuation"><span>próximo capítulo</span><strong>sobre</strong><span class="prototype-note">Orion B · estudo de composição</span></footer>
+</body>
+</html>

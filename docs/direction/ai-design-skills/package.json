@@ -1,0 +1,15 @@
+{
+  "name": "myke-design-comp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "oxlint --deny-warnings app.mjs verify.mjs",
+    "typecheck": "tsc --allowJs --checkJs --noEmit --strict --target es2022 --module nodenext --lib es2022,dom,dom.iterable --skipLibCheck app.mjs verify.mjs",
+    "verify": "node verify.mjs"
+  },
+  "devDependencies": {
+    "@oxlint/plugins": "1.81.0",
+    "oxlint": "1.81.0",
+    "playwright": "1.62.1"
+  }
+}

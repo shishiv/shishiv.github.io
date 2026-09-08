@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <title>Orion, direção B</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07080b;
+        --surface: rgba(7, 8, 11, 0.92);
+        --ink: #f1efe9;
+        --muted: #b6bdc7;
+        --line: #526170;
+        --soft-line: rgba(177, 197, 216, 0.24);
+        --accent: #ff6842;
+        --ice: #cce7ff;
+        --rail: clamp(184px, 14.6vw, 210px);
+        --sans: Arial, Helvetica, sans-serif;
+        --serif: Georgia, "Times New Roman", serif;
+        --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-width: 320px;
+        min-height: 100%;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+
+      body {
+        min-height: 100svh;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 100;
+        top: 10px;
+        left: 10px;
+        padding: 10px 13px;
+        color: var(--bg);
+        background: var(--ink);
+        transform: translateY(-160%);
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .atmosphere,
+      .atmosphere img {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .atmosphere {
+        z-index: 0;
+        background: var(--bg);
+        pointer-events: none;
+      }
+
+      .atmosphere img {
+        object-fit: cover;
+        object-position: center 48%;
+        filter: saturate(0.78) contrast(1.08) brightness(0.8);
+      }
+
+      .atmosphere::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(7, 8, 11, 0.94) 0%, rgba(7, 8, 11, 0.56) 35%, rgba(7, 8, 11, 0.1) 70%, rgba(7, 8, 11, 0.6) 100%),
+          radial-gradient(circle at 70% 46%, transparent 0 20%, rgba(7, 8, 11, 0.12) 52%, rgba(7, 8, 11, 0.48) 100%);
+      }
+
+      .desktop-shell {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: var(--rail) minmax(0, 1fr);
+        width: 100%;
+        height: 100svh;
+        min-height: 680px;
+        overflow: hidden;
+      }
+
+      .rail {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        padding: 30px 22px 28px;
+        border-right: 1px solid var(--soft-line);
+        background: rgba(6, 7, 10, 0.97);
+      }
+
+      .identity {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 750;
+        letter-spacing: -0.02em;
+      }
+
+      .role,
+      .rail-foot,
+      .mobile-role {
+        color: #aeb8c5;
+        font: 10px/1.55 var(--mono);
+      }
+
+      .role {
+        margin-top: 7px;
+      }
+
+      .rail nav {
+        display: grid;
+        margin-top: 64px;
+      }
+
+      .nav-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        border-top: 1px solid var(--soft-line);
+        color: #b8c1cd;
+        font-size: 13px;
+      }
+
+      .nav-item:last-child {
+        border-bottom: 1px solid var(--soft-line);
+      }
+
+      .nav-item[aria-current="page"] {
+        padding-left: 14px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .nav-item[aria-current="page"]::before {
+        position: absolute;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        content: "";
+      }
+
+      .rail-foot {
+        margin-top: auto;
+      }
+
+      .desktop-stage {
+        position: relative;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      .desktop-hero {
+        position: absolute;
+        z-index: 5;
+        top: clamp(54px, 8.3vh, 76px);
+        left: clamp(48px, 5.25vw, 76px);
+        width: min(42vw, 510px);
+      }
+
+      .context-line {
+        margin: 0 0 17px;
+        color: var(--accent);
+        font: 10px/1.4 var(--mono);
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 8ch;
+        margin: 0;
+        font-size: clamp(58px, 5vw, 72px);
+        font-weight: 760;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
+      }
+
+      h1 em {
+        display: block;
+        color: #e0e6ef;
+        font-family: var(--serif);
+        font-weight: 400;
+        letter-spacing: -0.035em;
+        white-space: nowrap;
+      }
+
+      .lead {
+        width: min(38vw, 500px);
+        margin: 20px 0 0;
+        color: #ccd1d8;
+        font-size: clamp(14px, 1.1vw, 16px);
+        line-height: 1.52;
+      }
+
+      .legend {
+        position: absolute;
+        z-index: 6;
+        top: clamp(62px, 8.4vh, 78px);
+        right: clamp(25px, 3vw, 44px);
+        color: #bac3ce;
+        font: 10px/1.4 var(--mono);
+      }
+
+      .legend .case-key {
+        color: var(--ice);
+      }
+
+      .legend .method-key {
+        margin-left: 16px;
+        color: var(--accent);
+      }
+
+      .desktop-map {
+        position: absolute;
+        z-index: 2;
+        top: 54px;
+        right: 2%;
+        bottom: 70px;
+        left: 21%;
+        min-width: 0;
+        margin: 0;
+      }
+
+      .desktop-map svg,
+      .mobile-map svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .case-line {
+        fill: none;
+        stroke: var(--line);
+        stroke-width: 1.15;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .method-route {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.8;
+        stroke-dasharray: 5 7;
+        filter: drop-shadow(0 5px 9px rgba(255, 104, 66, 0.38));
+        vector-effect: non-scaling-stroke;
+      }
+
+      .case-star {
+        fill: #eef8ff;
+        stroke: #91bfe8;
+        stroke-width: 1.5;
+        filter: drop-shadow(0 5px 8px rgba(181, 220, 255, 0.6));
+        vector-effect: non-scaling-stroke;
+      }
+
+      .case-star.selected {
+        fill: var(--accent);
+        stroke: #ffd0c3;
+        filter: drop-shadow(0 6px 10px rgba(255, 104, 66, 0.72));
+      }
+
+      .case-ring {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.2;
+        opacity: 0.9;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .method-star {
+        fill: #19100f;
+        stroke: var(--accent);
+        stroke-width: 1.35;
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: rotate(45deg);
+        vector-effect: non-scaling-stroke;
+      }
+
+      .node {
+        position: absolute;
+        z-index: 4;
+        min-width: 170px;
+        padding: 9px 12px;
+        border: 1px solid rgba(220, 232, 244, 0.22);
+        background: rgba(7, 8, 11, 0.9);
+      }
+
+      .node strong {
+        display: block;
+        font-size: 13px;
+        line-height: 1.2;
+      }
+
+      .node span {
+        display: block;
+        margin-top: 4px;
+        color: #b8c0ca;
+        font: 9px/1.35 var(--mono);
+      }
+
+      .node.selected {
+        border-color: rgba(255, 104, 66, 0.82);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+      }
+
+      .desktop-map .n1 {
+        top: 10%;
+        left: 17%;
+      }
+
+      .desktop-map .n2 {
+        top: 5%;
+        left: 67%;
+      }
+
+      .desktop-map .n3 {
+        bottom: 3%;
+        left: 2%;
+      }
+
+      .desktop-map .n4 {
+        right: 4%;
+        bottom: 0;
+      }
+
+      .method-label {
+        position: absolute;
+        z-index: 4;
+        color: #edf1f5;
+        font: 9px/1 var(--mono);
+      }
+
+      .method-label.restriction {
+        top: 52%;
+        left: 28%;
+      }
+
+      .method-label.system {
+        top: 52%;
+        left: 41%;
+      }
+
+      .method-label.test {
+        top: 52%;
+        left: 54%;
+      }
+
+      .method-label.operation {
+        top: 61%;
+        left: 39%;
+        color: var(--accent);
+      }
+
+      .focus-panel {
+        position: absolute;
+        z-index: 7;
+        top: 34%;
+        right: clamp(24px, 2.4vw, 36px);
+        width: min(29%, 320px);
+        min-width: 276px;
+        padding: 24px;
+        border: 1px solid rgba(180, 199, 216, 0.42);
+        background: rgba(6, 7, 10, 0.93);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+      }
+
+      .focus-panel small,
+      .mobile-focus small {
+        color: var(--accent);
+        font: 9px/1.4 var(--mono);
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .focus-panel h2,
+      .mobile-focus h2 {
+        margin: 12px 0 8px;
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .focus-panel p,
+      .mobile-focus p {
+        margin: 0;
+        color: #d7dce2;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .focus-meta {
+        margin-top: 17px;
+        padding-top: 12px;
+        border-top: 1px solid var(--soft-line);
+        color: #b3bdc9;
+        font: 9px/1.4 var(--mono);
+      }
+
+      .case-cue {
+        display: block;
+        margin-top: 16px;
+        color: var(--accent);
+        font: 700 11px/1 var(--mono);
+      }
+
+      .all-cases {
+        position: absolute;
+        z-index: 6;
+        right: 29%;
+        bottom: 21%;
+        color: var(--accent);
+        font: 700 10px/1 var(--mono);
+      }
+
+      .continuation {
+        position: absolute;
+        z-index: 8;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        height: 62px;
+        padding: 0 clamp(48px, 5.25vw, 76px);
+        border-top: 1px solid var(--soft-line);
+        background: rgba(7, 8, 11, 0.93);
+        color: #c5d5e5;
+        font-size: 15px;
+      }
+
+      .mobile-shell {
+        display: none;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 1268px) and (min-width: 801px) {
+        .desktop-hero {
+          left: 48px;
+        }
+
+        .desktop-map {
+          left: 18%;
+        }
+
+        .desktop-map .n2 {
+          left: 65%;
+        }
+
+        .desktop-map .n4 {
+          right: 1%;
+        }
+
+        .focus-panel {
+          right: 22px;
+        }
+
+        .all-cases {
+          right: 30%;
+        }
+
+        .continuation {
+          padding-left: 48px;
+        }
+      }
+
+      @media (max-width: 800px) {
+        body {
+          min-height: 100svh;
+          overflow-y: auto;
+        }
+
+        .atmosphere img {
+          object-position: center center;
+          filter: saturate(0.76) contrast(1.08) brightness(0.72);
+        }
+
+        .atmosphere::after {
+          background:
+            linear-gradient(180deg, rgba(7, 8, 11, 0.45) 0%, rgba(7, 8, 11, 0.84) 37%, rgba(7, 8, 11, 0.12) 67%, rgba(7, 8, 11, 0.7) 100%),
+            linear-gradient(90deg, rgba(7, 8, 11, 0.42), transparent 42%, rgba(7, 8, 11, 0.28));
+        }
+
+        .desktop-shell {
+          display: none;
+        }
+
+        .mobile-shell {
+          position: relative;
+          z-index: 1;
+          display: grid;
+          grid-template-rows: auto minmax(0, 1fr);
+          width: 100%;
+          min-height: 100svh;
+          overflow: hidden;
+        }
+
+        .mobile-header {
+          padding: max(15px, env(safe-area-inset-top)) 18px 0;
+          border-bottom: 1px solid var(--soft-line);
+          background: rgba(6, 7, 10, 0.8);
+        }
+
+        .mobile-masthead {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .mobile-identity {
+          font-size: 18px;
+          font-weight: 750;
+          letter-spacing: -0.02em;
+        }
+
+        .mobile-role {
+          max-width: 19ch;
+          text-align: right;
+        }
+
+        .mobile-header nav {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          margin-top: 11px;
+        }
+
+        .mobile-header .nav-item {
+          justify-content: center;
+          min-height: 42px;
+          border: 0;
+          border-top: 1px solid var(--soft-line);
+          font-size: 11px;
+        }
+
+        .mobile-header .nav-item:last-child {
+          border-bottom: 0;
+        }
+
+        .mobile-header .nav-item[aria-current="page"] {
+          padding: 0 0 0 8px;
+        }
+
+        .mobile-header .nav-item[aria-current="page"]::before {
+          left: calc(50% - 25px);
+        }
+
+        .mobile-main {
+          display: grid;
+          grid-template-rows: auto minmax(232px, 1fr) auto auto;
+          min-height: 0;
+          padding: 16px 18px max(12px, env(safe-area-inset-bottom));
+          overflow: hidden;
+        }
+
+        .mobile-hero .context-line {
+          max-width: 32ch;
+          margin-bottom: 9px;
+          font-size: 8px;
+        }
+
+        .mobile-hero h1 {
+          max-width: none;
+          font-size: clamp(45px, 13.4vw, 54px);
+          line-height: 0.88;
+        }
+
+        .mobile-hero h1 .first-line {
+          display: block;
+        }
+
+        .mobile-hero h1 em {
+          display: inline;
+        }
+
+        .mobile-hero .lead {
+          width: 100%;
+          max-width: 46ch;
+          margin-top: 13px;
+          color: #d1d6dd;
+          font-size: 13px;
+          line-height: 1.42;
+        }
+
+        .mobile-map {
+          position: relative;
+          min-width: 0;
+          min-height: 232px;
+          margin: 7px 0 2px;
+        }
+
+        .mobile-map .node {
+          min-width: 0;
+          padding: 6px 7px;
+          background: rgba(7, 8, 11, 0.9);
+        }
+
+        .mobile-map .node strong {
+          font-size: 10px;
+        }
+
+        .mobile-map .node span {
+          margin-top: 2px;
+          font-size: 7px;
+          line-height: 1.3;
+        }
+
+        .mobile-map .n1 {
+          top: 2%;
+          left: 8%;
+          width: 150px;
+        }
+
+        .mobile-map .n2 {
+          top: 18%;
+          right: 0;
+          width: 133px;
+        }
+
+        .mobile-map .n3 {
+          bottom: 0;
+          left: 0;
+          width: 116px;
+        }
+
+        .mobile-map .n4 {
+          right: 0;
+          bottom: 0;
+          width: 158px;
+        }
+
+        .mobile-map .method-label {
+          font-size: 7px;
+        }
+
+        .mobile-map .restriction {
+          top: 48%;
+          left: 24%;
+        }
+
+        .mobile-map .system {
+          top: 48%;
+          left: 43%;
+        }
+
+        .mobile-map .test {
+          top: 48%;
+          left: 61%;
+        }
+
+        .mobile-map .operation {
+          top: 66%;
+          left: 43%;
+        }
+
+        .mobile-focus {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 9px 16px;
+          align-items: end;
+          padding: 13px 14px 12px;
+          border: 1px solid rgba(180, 199, 216, 0.4);
+          background: rgba(6, 7, 10, 0.93);
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+        }
+
+        .mobile-focus-copy {
+          min-width: 0;
+        }
+
+        .mobile-focus h2 {
+          margin: 6px 0 4px;
+          font-size: 22px;
+        }
+
+        .mobile-focus p {
+          font-size: 12px;
+        }
+
+        .mobile-focus .focus-meta {
+          grid-column: 1 / -1;
+          margin-top: 0;
+          padding-top: 8px;
+          font-size: 8px;
+        }
+
+        .mobile-focus .case-cue {
+          margin: 0;
+          white-space: nowrap;
+        }
+
+        .mobile-continuation {
+          margin-top: 10px;
+          color: #c7d8e8;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 350px) {
+        .mobile-main {
+          padding-inline: 14px;
+        }
+
+        .mobile-role {
+          display: none;
+        }
+
+        .mobile-map .n1 {
+          left: 2%;
+        }
+
+        .mobile-map .n2 {
+          right: -2%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+    <picture class="atmosphere" aria-hidden="true">
+      <source media="(max-width: 800px)" srcset="assets/orion-atmosphere-mobile.png" />
+      <img src="assets/orion-atmosphere-desktop.png" alt="" />
+    </picture>
+
+    <div class="desktop-shell">
+      <aside class="rail" aria-label="Identidade e navegação">
+        <p class="identity">myke matos</p>
+        <div class="role">founder / cto<br />product engineer</div>
+        <nav aria-label="Principal">
+          <span class="nav-item" aria-current="page">home</span>
+          <span class="nav-item">sobre</span>
+          <span class="nav-item">cases</span>
+          <span class="nav-item">contato</span>
+        </nav>
+        <div class="rail-foot">frutal, mg<br /><br />pt / en</div>
+      </aside>
+
+      <main class="desktop-stage" id="main-content">
+        <section class="desktop-hero" aria-labelledby="desktop-title">
+          <p class="context-line">orion / cases são estrelas · método é a constelação</p>
+          <h1 id="desktop-title">construir é <em>só metade.</em></h1>
+          <p class="lead">eu assumo problemas reais e confusos pelo ciclo inteiro: encontro a restrição, mudo o sistema, testo o caminho e coloco para funcionar.</p>
+        </section>
+
+        <div class="legend" aria-hidden="true"><span class="case-key">● cases</span><span class="method-key">◇ método</span></div>
+
+        <figure class="desktop-map" aria-labelledby="desktop-map-caption">
+          <svg viewBox="0 0 800 660" preserveAspectRatio="none" aria-hidden="true">
+            <path class="case-line" d="M125 92 L650 106 L535 580 L150 570 Z M125 92 L310 350 L650 106 M150 570 L310 350 L535 580" />
+            <path class="method-route" d="M125 92 Q210 270 300 350 L405 350 L510 350 L430 520" />
+            <circle class="case-star selected" cx="125" cy="92" r="15" />
+            <circle class="case-ring" cx="125" cy="92" r="27" />
+            <circle class="case-star" cx="650" cy="106" r="12" />
+            <circle class="case-star" cx="150" cy="570" r="12" />
+            <circle class="case-star" cx="535" cy="580" r="13" />
+            <rect class="method-star" x="294" y="344" width="12" height="12" />
+            <rect class="method-star" x="399" y="344" width="12" height="12" />
+            <rect class="method-star" x="504" y="344" width="12" height="12" />
+            <rect class="method-star" x="424" y="514" width="12" height="12" />
+          </svg>
+          <figcaption class="sr-only" id="desktop-map-caption">Quatro cases ligados pelo método de restrição, sistema, teste e operação.</figcaption>
+          <div class="node n1 selected"><strong>triangulotec</strong><span>produto do contexto à operação.</span></div>
+          <div class="node n2"><strong>scapola comunica</strong><span>presença digital com continuidade.</span></div>
+          <div class="node n3"><strong>gastei</strong><span>construção e distribuição no mesmo produto.</span></div>
+          <div class="node n4"><strong>inclusão digital UEMG</strong><span>tecnologia que acompanha o ensino.</span></div>
+          <span class="method-label restriction">restrição</span>
+          <span class="method-label system">sistema</span>
+          <span class="method-label test">teste</span>
+          <span class="method-label operation">operação</span>
+        </figure>
+
+        <aside class="focus-panel" aria-label="Case em foco">
+          <small>case em foco</small>
+          <h2>triangulotec</h2>
+          <p>produto do contexto à operação.</p>
+          <div class="focus-meta">contexto · produto · operação</div>
+          <span class="case-cue">ler o case →</span>
+        </aside>
+
+        <span class="all-cases">ver todos os cases →</span>
+        <div class="continuation">a constelação continua abaixo</div>
+      </main>
+    </div>
+
+    <div class="mobile-shell">
+      <header class="mobile-header">
+        <div class="mobile-masthead">
+          <div class="mobile-identity">myke matos</div>
+          <div class="mobile-role">founder / cto<br />product engineer</div>
+        </div>
+        <nav aria-label="Principal">
+          <span class="nav-item" aria-current="page">home</span>
+          <span class="nav-item">sobre</span>
+          <span class="nav-item">cases</span>
+          <span class="nav-item">contato</span>
+        </nav>
+      </header>
+
+      <main class="mobile-main">
+        <section class="mobile-hero" aria-labelledby="mobile-title">
+          <p class="context-line">orion / cases são estrelas · método é a constelação</p>
+          <h1 id="mobile-title"><span class="first-line">construir é</span> <em>só metade.</em></h1>
+          <p class="lead">eu assumo problemas reais e confusos pelo ciclo inteiro: encontro a restrição, mudo o sistema, testo o caminho e coloco para funcionar.</p>
+        </section>
+
+        <figure class="mobile-map" aria-labelledby="mobile-map-caption">
+          <svg viewBox="0 0 354 275" preserveAspectRatio="none" aria-hidden="true">
+            <path class="case-line" d="M82 35 L292 61 L276 242 L62 238 Z M82 35 L125 136 L292 61 M62 238 L125 136 L276 242" />
+            <path class="method-route" d="M82 35 Q94 99 124 136 L180 136 L236 136 L198 204" />
+            <circle class="case-star selected" cx="82" cy="35" r="10" />
+            <circle class="case-ring" cx="82" cy="35" r="17" />
+            <circle class="case-star" cx="292" cy="61" r="8" />
+            <circle class="case-star" cx="62" cy="238" r="8" />
+            <circle class="case-star" cx="276" cy="242" r="8" />
+            <rect class="method-star" x="120" y="132" width="8" height="8" />
+            <rect class="method-star" x="176" y="132" width="8" height="8" />
+            <rect class="method-star" x="232" y="132" width="8" height="8" />
+            <rect class="method-star" x="194" y="200" width="8" height="8" />
+          </svg>
+          <figcaption class="sr-only" id="mobile-map-caption">Quatro cases ligados pelo método de restrição, sistema, teste e operação.</figcaption>
+          <div class="node n1 selected"><strong>triangulotec</strong><span>contexto à operação.</span></div>
+          <div class="node n2"><strong>scapola comunica</strong><span>presença com continuidade.</span></div>
+          <div class="node n3"><strong>gastei</strong><span>construção e distribuição.</span></div>
+          <div class="node n4"><strong>inclusão digital UEMG</strong><span>tecnologia que acompanha o ensino.</span></div>
+          <span class="method-label restriction">restrição</span>
+          <span class="method-label system">sistema</span>
+          <span class="method-label test">teste</span>
+          <span class="method-label operation">operação</span>
+        </figure>
+
+        <aside class="mobile-focus" aria-label="Case em foco">
+          <div class="mobile-focus-copy">
+            <small>case em foco</small>
+            <h2>triangulotec</h2>
+            <p>produto do contexto à operação.</p>
+          </div>
+          <span class="case-cue">ler o case →</span>
+          <div class="focus-meta">contexto · produto · operação</div>
+        </aside>
+        <div class="mobile-continuation">a constelação continua abaixo</div>
+      </main>
+    </div>
+  </body>
+</html>
