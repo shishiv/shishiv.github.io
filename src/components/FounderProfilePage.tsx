@@ -146,6 +146,11 @@ export function FounderProfilePage({
                     <span>myke@triangulotec.com.br</span>
                     <small>{t.contactEmailNote}</small>
                   </a>
+                  <a href="https://www.instagram.com/uaimyke/" rel="me noopener noreferrer" target="_blank">
+                    <strong>Instagram ↗</strong>
+                    <span>@uaimyke</span>
+                    <small>{t.contactInstagramNote}</small>
+                  </a>
                   <a href="https://linkedin.com/in/mykematos" rel="me noopener noreferrer" target="_blank">
                     <strong>LinkedIn ↗</strong>
                     <small>{t.contactLinkedinNote}</small>

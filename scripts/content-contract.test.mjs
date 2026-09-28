@@ -28,7 +28,7 @@ test("every record keeps Portuguese and English semantically paired", () => {
   }
 });
 
-test("the public profile uses the approved founder and product positioning", async () => {
+test("the public profile centers the founder of triangulotec, not a job search", async () => {
   const files = [
     "src/components/FounderProfilePage.tsx",
     "src/components/GalaxyHero.tsx",
@@ -38,8 +38,11 @@ test("the public profile uses the approved founder and product positioning", asy
   const text = await Promise.all(files.map((file) => readFile(join(root, file), "utf8"))).then((parts) =>
     parts.join("\n"),
   );
-  assert.match(text, /founder\s*\/\s*cto/i);
-  assert.match(text, /product engineer/i);
+  assert.match(text, /founder da triangulotec/i);
+  assert.match(text, /founder of triangulotec/i);
+  assert.match(text, /https:\/\/www\.instagram\.com\/uaimyke\//);
+  assert.match(text, /mailto:myke@triangulotec\.com\.br/);
+  assert.doesNotMatch(text, /trabalho remoto|remote work|product engineer|founder\s*\/\s*cto/i);
   assert.doesNotMatch(text, /full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i);
 });
 

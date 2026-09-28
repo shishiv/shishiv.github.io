@@ -1,6 +1,6 @@
 ---
 name: myke matos
-description: founder / cto portfolio with case-led orbital archive
+description: founder of triangulotec profile with case-led orbital archive
 ---
 
 # design system: orbital archive
@@ -11,9 +11,9 @@ Next.js 15 App Router with static export, React 19, TypeScript, Anime.js 4 and p
 
 ## mode
 
-Persuade + Experience. The home establishes Myke as a Founder / CTO who works across product, engineering and operations. It should make the person, thesis and selected work legible before technical documentation.
+Persuade + Experience. The home establishes Myke as the founder of TrianguloTEC (WhatsApp automation for how companies run), with short videos for local shops as a separate front of his own. It should make the person, thesis and selected work legible before technical documentation.
 
-The evidence-backed professional claim is: “I take messy real-world problems through the whole loop: find the constraint, change the system, test the path, and make it run.” Product, design, research and technology are means inside that loop, not narrower substitutes for it.
+The hero claim follows TrianguloTEC’s product direction: the WhatsApp conversation a company already has becomes an operation that bills, answers, schedules and proves it, with an owner, a deadline and a record at every step. It claims no client, number or Meta status.
 
 ## direction
 

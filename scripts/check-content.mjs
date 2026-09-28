@@ -36,8 +36,12 @@ const publicText = await Promise.all(
   publicFiles.map((file) => readFile(join(root, file), "utf8")),
 ).then((parts) => parts.join("\n"));
 
-if (!/founder\s*\/\s*cto/i.test(publicText) || !/product engineer/i.test(publicText)) {
-  errors.push("approved founder / cto and product engineer positioning is missing");
+if (!/founder da triangulotec/i.test(publicText) || !/founder of triangulotec/i.test(publicText)) {
+  errors.push("approved founder of triangulotec positioning is missing");
+}
+
+if (/trabalho remoto|remote work|posi[cç][aã]o concreta|concrete position|product engineer|founder\s*\/\s*cto/i.test(publicText)) {
+  errors.push("job-seeker positioning found in public profile content");
 }
 
 if (/full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i.test(publicText)) {
