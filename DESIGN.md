@@ -31,12 +31,12 @@ Desktop home:
    - orbital stack graph connecting related frameworks, data, delivery and operations technologies;
    - no project cards or case controls on the home slide.
 3. About slide:
-   - one personal statement grounded in current study, research and product work;
-   - three ruled notes — curiosity, continuity and encounter — as extensions of that narrative, never service cards;
+   - one personal statement naming the two separate fronts: TrianguloTEC and short videos done on his own, outside TEC;
+   - three ruled notes — TrianguloTEC, videos and research — as extensions of that narrative, never service cards;
    - no contact links.
 4. Contact slide:
    - direct conversation is separated from public work;
-   - email is the primary action and each full row explains the destination before activation.
+   - email is the primary action for TrianguloTEC; video conversations go to Instagram (`@uaimyke`); each full row explains the destination before activation.
 5. Cases slide: the editorial index renders inside the persistent rail shell and owns its own vertical scroll.
 6. Deep-link case indexes:
    - `/case/`;
@@ -49,7 +49,7 @@ At 1268 × 768, every desktop slide fits exactly one viewport and the cases tabs
 
 The home only uses facts that support positioning, work or proof. Biographical details, metrics and arguments that need context belong in cases or future articles, not as isolated fragments.
 
-“Construir é só metade” remains the editorial headline, while its supporting sentence must name the full method: restriction discovery, system change, path testing and operation. Cases must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
+“A conversa vira operação” is the editorial headline, and its supporting sentence names what the operation does: bill, answer, schedule and prove, with an owner, a deadline and a record. Cases follow the method of restriction discovery, system change, path testing and operation, and must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
 
 Case copy states the product context and responsibility. It does not claim revenue, scale, uptime, adoption or institutional endorsement.
 
