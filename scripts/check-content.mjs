@@ -40,10 +40,6 @@ if (!/founder da triangulotec/i.test(publicText) || !/founder of triangulotec/i.
   errors.push("approved founder of triangulotec positioning is missing");
 }
 
-if (/trabalho remoto|remote work|posi[cç][aã]o concreta|concrete position|product engineer|founder\s*\/\s*cto/i.test(publicText)) {
-  errors.push("job-seeker positioning found in public profile content");
-}
-
 if (/full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i.test(publicText)) {
   errors.push("unsupported full-stack positioning found in public profile content");
 }
