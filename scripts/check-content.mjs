@@ -36,8 +36,8 @@ const publicText = await Promise.all(
   publicFiles.map((file) => readFile(join(root, file), "utf8")),
 ).then((parts) => parts.join("\n"));
 
-if (!/founder\s*\/\s*cto/i.test(publicText) || !/product engineer/i.test(publicText)) {
-  errors.push("approved founder / cto and product engineer positioning is missing");
+if (!/founder da triangulotec/i.test(publicText) || !/founder of triangulotec/i.test(publicText)) {
+  errors.push("approved founder of triangulotec positioning is missing");
 }
 
 if (/full[- ]stack (developer|engineer)|engenheir[oa] full[- ]stack/i.test(publicText)) {

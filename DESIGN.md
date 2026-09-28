@@ -1,6 +1,6 @@
 ---
 name: myke matos
-description: founder / cto portfolio with case-led orbital archive
+description: founder of triangulotec profile with case-led orbital archive
 ---
 
 # design system: orbital archive
@@ -11,9 +11,9 @@ Next.js 15 App Router with static export, React 19, TypeScript, Anime.js 4 and p
 
 ## mode
 
-Persuade + Experience. The home establishes Myke as a Founder / CTO who works across product, engineering and operations. It should make the person, thesis and selected work legible before technical documentation.
+Persuade + Experience. The home establishes Myke as the founder of TrianguloTEC (WhatsApp automation for how companies run), with short videos for local shops as a separate front of his own. It should make the person, thesis and selected work legible before technical documentation.
 
-The evidence-backed professional claim is: “I take messy real-world problems through the whole loop: find the constraint, change the system, test the path, and make it run.” Product, design, research and technology are means inside that loop, not narrower substitutes for it.
+The hero claim follows TrianguloTEC’s product direction: the WhatsApp conversation a company already has becomes an operation that bills, answers, schedules and proves it, with an owner, a deadline and a record at every step. It claims no client, number or Meta status.
 
 ## direction
 
@@ -31,12 +31,12 @@ Desktop home:
    - orbital stack graph connecting related frameworks, data, delivery and operations technologies;
    - no project cards or case controls on the home slide.
 3. About slide:
-   - one personal statement grounded in current study, research and product work;
-   - three ruled notes — curiosity, continuity and encounter — as extensions of that narrative, never service cards;
+   - one personal statement naming the two separate fronts: TrianguloTEC and short videos done on his own, outside TEC;
+   - three ruled notes — TrianguloTEC, videos and research — as extensions of that narrative, never service cards;
    - no contact links.
 4. Contact slide:
    - direct conversation is separated from public work;
-   - email is the primary action and each full row explains the destination before activation.
+   - email is the primary action for TrianguloTEC; video conversations go to Instagram (`@uaimyke`); each full row explains the destination before activation.
 5. Cases slide: the editorial index renders inside the persistent rail shell and owns its own vertical scroll.
 6. Deep-link case indexes:
    - `/case/`;
@@ -49,7 +49,7 @@ At 1268 × 768, every desktop slide fits exactly one viewport and the cases tabs
 
 The home only uses facts that support positioning, work or proof. Biographical details, metrics and arguments that need context belong in cases or future articles, not as isolated fragments.
 
-“Construir é só metade” remains the editorial headline, while its supporting sentence must name the full method: restriction discovery, system change, path testing and operation. Cases must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
+“A conversa vira operação” is the editorial headline, and its supporting sentence names what the operation does: bill, answer, schedule and prove, with an owner, a deadline and a record. Cases follow the method of restriction discovery, system change, path testing and operation, and must eventually prove that sequence; the trace corpus proves the repeated working method, not customer outcomes, adoption, revenue, uptime or reliability.
 
 Case copy states the product context and responsibility. It does not claim revenue, scale, uptime, adoption or institutional endorsement.
 
